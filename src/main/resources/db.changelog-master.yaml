@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-lesson1.yaml
+  - changeSet:
+      id: 1
+      author: your_liquibase_username
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - colun:
+                  name: password;
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - colun:
+                  name: username
+                  type: varchar(50)
+              - colun:
+                  name: phoneNumber
+                  type: int(8)
+                  constraints:
+                    nullable: false
