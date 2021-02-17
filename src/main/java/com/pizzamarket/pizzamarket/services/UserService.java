@@ -13,7 +13,7 @@ public interface UserService {
      * @param inputUserDto
      * @return
      */
-    User createUser(InputUserDto inputUserDto);
+    User saveUser(InputUserDto inputUserDto);
 
     /**
      * Метод удаления пользователя из базы
@@ -47,4 +47,5 @@ public interface UserService {
      */
     List<User> findByPhoneNumber(Integer phoneNumber);
 
+    List<User> findAll();
 }

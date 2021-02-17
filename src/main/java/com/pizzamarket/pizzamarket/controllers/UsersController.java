@@ -1,4 +1,4 @@
-package com.pizzamarket.pizzamarket.controllerыs;
+package com.pizzamarket.pizzamarket.controllers;
 
 import com.pizzamarket.pizzamarket.entities.User;
 import com.pizzamarket.pizzamarket.services.UserServiceImp;

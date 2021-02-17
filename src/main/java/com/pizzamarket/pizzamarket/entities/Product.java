@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 
 
 import javax.persistence.GeneratedValue;
+import java.math.BigDecimal;
 
 @Entity
 @AllArgsConstructor
@@ -20,14 +21,18 @@ public class Product {
     @Id
     @GeneratedValue
     private Long id;
+
     @Column
     @NonNull
-    private Long cost;
+    private BigDecimal cost;
+
     @Column
     @NonNull
     private String title;
+
     @Column
     private String description;
+
     @Column
     private String teg;
 }

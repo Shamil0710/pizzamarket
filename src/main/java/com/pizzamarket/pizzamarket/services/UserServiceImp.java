@@ -53,11 +53,9 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
         log.info("Удаление пользователя по номеру телеофа" + inputUserDto.getPhoneNumber().toString() + "\n{}");
 
-
         //TODO Надо бы придумать
 
         deleteById(findByPhoneNumber(inputUserDto.getPhoneNumber()));
-
     }
 
     @Override

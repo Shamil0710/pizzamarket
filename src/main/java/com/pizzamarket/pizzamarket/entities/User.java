@@ -30,10 +30,13 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
     @Column
-    private String username;
+    private String firstName;
+    @Column
+    private String lastName;
     @Column(nullable = false)
     @Size(min = 8, max = 8)
     private Integer phoneNumber;
+
 
     //Имплементация интерфейса UserDetails необходимого для работы СпрингСикъюра
     @Override
