@@ -9,6 +9,8 @@ import lombok.Getter;
 public class OutputUserDto {
 
     private Long id;
-    private String Name;
+    private String firstName;
+    private String lastName;
     private Integer phoneNumber;
+
 }

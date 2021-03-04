@@ -80,7 +80,6 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-
         User user = userRepository.findByUsername(userName);
 
         if (user == null) {

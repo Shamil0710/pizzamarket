@@ -7,7 +7,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public class InputUserDto {
 
-    private String password;
-    private String Name;
+    private Long id;
+    private String firstName;
+    private String lastName;
     private Integer phoneNumber;
+    private String password;
 }

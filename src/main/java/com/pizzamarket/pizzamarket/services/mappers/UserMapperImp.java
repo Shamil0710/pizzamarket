@@ -13,9 +13,10 @@ public class UserMapperImp implements UserMapper {
 
         User user = new User();
 
-        user.setUsername(inputUserDto.getName());
+        user.setFirstName(inputUserDto.getFirstName());
         user.setPassword(inputUserDto.getPassword());
         user.setPhoneNumber(inputUserDto.getPhoneNumber());
+        user.setLastName(inputUserDto.getLastName());
 
         return user;
     }
@@ -23,6 +24,6 @@ public class UserMapperImp implements UserMapper {
     @Override
     public OutputUserDto toDto(User user) {
 
-        return new OutputUserDto(user.getId(), user.getUsername(), user.getPhoneNumber());
+        return new OutputUserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
     }
 }
