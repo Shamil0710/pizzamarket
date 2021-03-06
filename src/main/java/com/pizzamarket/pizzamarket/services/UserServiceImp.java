@@ -42,25 +42,19 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     @Override
     public void deleteById(Long id) {
-
         log.info("Удаление пользователя по ID" + id.toString() + "\n{}");
-
         userRepository.deleteById(id);
     }
 
     @Override
     public void deleteByPhoneNumber(InputUserDto inputUserDto) {
-
         log.info("Удаление пользователя по номеру телеофа" + inputUserDto.getPhoneNumber().toString() + "\n{}");
-
         //TODO Надо бы придумать
-
         deleteById(findByPhoneNumber(inputUserDto.getPhoneNumber()));
     }
 
     @Override
     public void upgradeUser(InputUserDto inputUserDto) {
-
         //TODO Придумать по кросате, жи есть жи
     }
 
@@ -70,7 +64,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
     }
 
     @Override
-    public List<User> findByPhoneNumber(Integer phoneNumber) {
+    public User findByPhoneNumber(Integer phoneNumber) {
         return userRepository.findByPhoneNumber(phoneNumber);
     }
 

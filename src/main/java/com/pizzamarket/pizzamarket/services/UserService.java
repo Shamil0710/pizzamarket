@@ -45,7 +45,7 @@ public interface UserService {
      * @param phoneNumber
      * @return
      */
-    List<User> findByPhoneNumber(Integer phoneNumber);
+    User findByPhoneNumber(Integer phoneNumber);
 
     List<User> findAll();
 }
