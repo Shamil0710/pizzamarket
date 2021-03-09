@@ -47,5 +47,9 @@ public interface UserService {
      */
     User findByPhoneNumber(Integer phoneNumber);
 
+    /**
+     * Получение полного списка клиентов
+     * @return
+     */
     List<User> findAll();
 }

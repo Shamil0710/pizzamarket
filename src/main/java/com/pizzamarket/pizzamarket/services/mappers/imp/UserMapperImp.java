@@ -1,8 +1,9 @@
-package com.pizzamarket.pizzamarket.services.mappers;
+package com.pizzamarket.pizzamarket.services.mappers.imp;
 
 import com.pizzamarket.pizzamarket.dto.InputUserDto;
 import com.pizzamarket.pizzamarket.dto.OutputUserDto;
 import com.pizzamarket.pizzamarket.entities.User;
+import com.pizzamarket.pizzamarket.services.mappers.UserMapper;
 import org.springframework.stereotype.Service;
 
 @Service

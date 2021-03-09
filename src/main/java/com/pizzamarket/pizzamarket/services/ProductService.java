@@ -14,7 +14,7 @@ public interface ProductService {
      * @param inputProductDto
      * @return
      */
-    Product saveProduct(InputProductDto inputProductDto);
+    Product createProduct(InputProductDto inputProductDto);
 
     /**
      * Метод удаление продукта по ID
@@ -26,7 +26,7 @@ public interface ProductService {
      * Обновление товара
      * @param inputProductDto
      */
-    void upgradeUProduct(InputProductDto inputProductDto);
+    void upgradeProduct(InputProductDto inputProductDto);
 
     /**
      * Поиск товара по ID

@@ -34,5 +34,5 @@ public class Product {
     private String description;
 
     @Column
-    private String teg;
+    private String tag;
 }

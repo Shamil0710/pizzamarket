@@ -1,10 +1,11 @@
-package com.pizzamarket.pizzamarket.services;
+package com.pizzamarket.pizzamarket.services.imp;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pizzamarket.pizzamarket.dto.InputUserDto;
 import com.pizzamarket.pizzamarket.entities.User;
 import com.pizzamarket.pizzamarket.repositorys.UserRepository;
-import com.pizzamarket.pizzamarket.services.mappers.UserMapperImp;
+import com.pizzamarket.pizzamarket.services.UserService;
+import com.pizzamarket.pizzamarket.services.mappers.imp.UserMapperImp;
 import com.pizzamarket.pizzamarket.utils.MapperUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
     public void deleteByPhoneNumber(InputUserDto inputUserDto) {
         log.info("Удаление пользователя по номеру телеофа" + inputUserDto.getPhoneNumber().toString() + "\n{}");
         //TODO Надо бы придумать
-        deleteById(findByPhoneNumber(inputUserDto.getPhoneNumber()));
+        deleteById(findByPhoneNumber(inputUserDto.getPhoneNumber()).getId());
     }
 
     @Override
@@ -65,7 +66,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     @Override
     public User findByPhoneNumber(Integer phoneNumber) {
-        return userRepository.findByPhoneNumber(phoneNumber);
+        return userRepository.findByPhoneNumber(phoneNumber).get(0);
     }
 
     public List<User> getAllUsers() {

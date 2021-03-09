@@ -3,12 +3,13 @@ package com.pizzamarket.pizzamarket.controllers;
 import com.pizzamarket.pizzamarket.dto.InputUserDto;
 import com.pizzamarket.pizzamarket.dto.OutputUserDto;
 import com.pizzamarket.pizzamarket.entities.User;
-import com.pizzamarket.pizzamarket.services.UserServiceImp;
-import com.pizzamarket.pizzamarket.services.mappers.UserMapperImp;
+import com.pizzamarket.pizzamarket.services.imp.UserServiceImp;
+import com.pizzamarket.pizzamarket.services.mappers.imp.UserMapperImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class UsersController {
@@ -20,9 +21,11 @@ public class UsersController {
     private UserMapperImp userMapperImp;
 
     @GetMapping("user/all")
-    public List<User> allUsers() {
+    public List<OutputUserDto> allUsers() {
 
-       return userServiceImp.getAllUsers();
+       return userServiceImp.getAllUsers().stream()
+               .map(e -> userMapperImp.toDto(e))
+               .collect(Collectors.toList());
     }
 
     @GetMapping("user/{userId}")

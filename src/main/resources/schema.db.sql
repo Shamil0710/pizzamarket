@@ -16,7 +16,7 @@ create table if not exists "mampiza"."product"(
     "cost"              NUMERIC(17, 2) NOT NULL,
     "title"             VARCHAR,
     "description"       VARCHAR,
-    "teg"               VARCHAR,
+    "tag"               VARCHAR,
     constraint  proct_table_pk primary key ("product_id")
 );
 

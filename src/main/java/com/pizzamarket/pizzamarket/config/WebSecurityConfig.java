@@ -1,6 +1,6 @@
 package com.pizzamarket.pizzamarket.config;
 
-import com.pizzamarket.pizzamarket.services.UserServiceImp;
+import com.pizzamarket.pizzamarket.services.imp.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
