@@ -8,54 +8,71 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-@RestController
+/**
+ * Контролер для получния информации о товаре
+ */
+@Slf4j
+@RestController(value = EndpointConstants.PRODUCT)
 public class ProductController {
 
-//    @GetMapping("user/{userId}")
-//    public @ResponseBody
-//    OutputUserDto getUserById(@PathVariable Long userId) {
-//        return userMapperImp.toDto(userServiceImp.findById(userId).get());
-//    }
-
     @Autowired
-    private ProductServiceImp productServiceImp;
+    private ProductService productService;
 
-    @Autowired
-    private ProductMapperImp productMapperImp;
-
-    @GetMapping("product/all")
-    public @ResponseBody
-    List<OutputProductDto> getAllProduct() {
-        return productServiceImp.getAll().stream()
-                .map(e -> productMapperImp.toDto(e))
-                .collect(Collectors.toList());
+    /**
+     * Метод получения полного перичня товаров
+     * @return
+     */
+    @GetMapping(EndpointConstants.GET_ALL)
+    public List<OutputProductDto> getAllProduct() {
+        return productService.getAll();
     }
 
-    @GetMapping("product/{page}/{pageSize}")
-    List<OutputProductDto> getPage(@PathVariable Integer page, Integer pageSize) {
-        return productServiceImp.getPage(page, pageSize).stream()
-                .map(e -> productMapperImp.toEntity(e))
-                .collect(Collectors.toList());
+    /**
+     * Получение заданой страницы с указаным количеством итемов
+     * @param productDto входной дто
+     * @return
+     */
+    @GetMapping(EndpointConstants.GET_PRODUCT_PAGE)
+    List<OutputProductDto> getPage(@PathVariable RequestProductDto productDto) {
+        return productService.getPage(productDto.getPage(), productDto.getCount());
     }
 
-    @PutMapping("product/create")
+    /**
+     * Добавление нового продукта
+     * @param inputProductDto входное дто
+     */
+    @PutMapping(EndpointConstants.PUT_CREATE)
     void createProduct(@RequestBody InputProductDto inputProductDto) {
         productServiceImp.createProduct(inputProductDto);
     }
 
-    @PutMapping("product/upgrade")
+    /**
+     * Одновление существующего товара
+     * @param inputProductDto входное дто
+     */
+    @PutMapping(EndpointConstants.UPGRADE_PRODUCT)
     void upgradeProduct(@RequestBody InputProductDto inputProductDto) {
         productServiceImp.upgradeProduct(inputProductDto);
     }
 
-    @GetMapping("product/filetr/{page}/{pageSize}")
-    List<OutputProductDto> getFilteredPages(Integer page, Integer pageSize, List<String> tags) {
-        List<OutputProductDto> outputProductDtoList = productServiceImp.getByTag(tags).stream()
-                .map(e -> productMapperImp.toDto(e))
-                .collect(Collectors.toList());
-
+    /**
+     * дто запроса продуктов
+     * @param productDto дто запроса продуктов
+     * @param bindingResult возращает ошибки валидации
+     * @return
+     */
+    @PostMapping(EndpointConstants.GET_BY_TAGS)
+    ResponseEntity<List<OutputProductDto>> getFilteredPages(@Valid RequestProductDto productDto, BindingResult bindingResult) {
+        log.info("Запрос по тэгам");
+        //При наличии оишбок валидации логируем ошибки и отдаем BAD_REQUEST
+        if (bindingResult.hasErrors()) {
+            log.info("Ошибка валидации ожидаемого запроса");
+            bindingResult.getAllErrors().stream().map(ObjectError::toString).forEach(log::info);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok(productService.getByTag(productDto));
     }
 
+    //TODO Фильтрация по названию...
 }

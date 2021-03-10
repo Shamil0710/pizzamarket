@@ -1,6 +1,7 @@
 package com.pizzamarket.pizzamarket.services;
 
 import com.pizzamarket.pizzamarket.dto.InputUserDto;
+import com.pizzamarket.pizzamarket.dto.OutputUserDto;
 import com.pizzamarket.pizzamarket.entities.User;
 
 import java.util.List;
@@ -23,9 +24,9 @@ public interface UserService {
 
     /**
      * Удаление пользователя из базы
-     * @param inputUserDto
+     * @param phoneNumber
      */
-    void deleteByPhoneNumber(InputUserDto inputUserDto);
+    void deleteByPhoneNumber(Integer phoneNumber);
 
     /**
      * Обновление даных у пользователе
@@ -38,18 +39,18 @@ public interface UserService {
      * @param id
      * @return
      */
-    Optional<User> findById(Long id);
+    OutputUserDto findById(Long id);
 
     /**
      * Поиск пользователя по нормеру телефона
      * @param phoneNumber
      * @return
      */
-    User findByPhoneNumber(Integer phoneNumber);
+    OutputUserDto findByPhoneNumber(Integer phoneNumber);
 
     /**
      * Получение полного списка клиентов
      * @return
      */
-    List<User> findAll();
+    List<OutputUserDto> findAll();
 }

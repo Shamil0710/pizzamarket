@@ -2,7 +2,6 @@ package com.pizzamarket.pizzamarket.services;
 
 import com.pizzamarket.pizzamarket.dto.InputProductDto;
 import com.pizzamarket.pizzamarket.entities.Product;
-import com.pizzamarket.pizzamarket.entities.User;
 
 import java.util.List;
 import java.util.Optional;

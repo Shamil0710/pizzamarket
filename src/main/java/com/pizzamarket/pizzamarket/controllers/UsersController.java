@@ -9,18 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @RestController
 public class UsersController {
 
     @Autowired
-    private UserServiceImp userServiceImp;
+    private UserService userService;
 
-    @Autowired
-    private UserMapperImp userMapperImp;
 
-    @GetMapping("user/all")
+    /**
+     * ПОлучение полного списка пользователей
+     * @return
+     */
+    @GetMapping(EndpointConstants.GET_ALL)
     public List<OutputUserDto> allUsers() {
 
        return userServiceImp.getAllUsers().stream()
@@ -28,19 +30,33 @@ public class UsersController {
                .collect(Collectors.toList());
     }
 
-    @GetMapping("user/{userId}")
+    /**
+     * Получение пользователя по id
+     * @param userId id пользователя
+     * @return
+     */
+    @GetMapping(EndpointConstants.GET_BY_USERID)
     public @ResponseBody
     OutputUserDto getUserById(@PathVariable Long userId) {
         return userMapperImp.toDto(userServiceImp.findById(userId).get());
     }
 
-    @GetMapping("user/{phoneNumber}")
+    /**
+     * Получение пользователя по номеру телефона
+     * @param phoneNumber номер телефона
+     * @return
+     */
+    @GetMapping(EndpointConstants.GET_BY_PHONENUMBER)
     public @ResponseBody
     OutputUserDto getUserByPhoneNumber(@PathVariable Integer phoneNumber) {
         return userMapperImp.toDto(userServiceImp.findByPhoneNumber(phoneNumber));
     }
 
-    @PutMapping("user/create")
+    /**
+     * Добавление нового пользователя
+     * @param inputUserDto Входное дто с информацией о пользователе
+     */
+    @PutMapping(EndpointConstants.PUT_CREATE)
     public void createUser(@RequestBody InputUserDto inputUserDto) {
         userServiceImp.createUser(inputUserDto);
     }

@@ -1,15 +1,18 @@
 package com.pizzamarket.pizzamarket.services.imp;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+
 import com.pizzamarket.pizzamarket.dto.InputProductDto;
 import com.pizzamarket.pizzamarket.entities.Product;
 import com.pizzamarket.pizzamarket.repositorys.ProductRepository;
 import com.pizzamarket.pizzamarket.services.ProductService;
 import com.pizzamarket.pizzamarket.services.mappers.imp.ProductMapperImp;
 import com.pizzamarket.pizzamarket.utils.MapperUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mapping.MappingException;
 import org.springframework.stereotype.Service;
+
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -23,7 +26,7 @@ public class ProductServiceImp implements ProductService {
     ProductRepository productRepository;
 
     @Autowired
-    ProductMapperImp productMapperImp;
+    DtoToProductMapper dtoToProductMapper;
 
     @Override
     public Product createProduct(InputProductDto inputProductDto) {
@@ -34,7 +37,7 @@ public class ProductServiceImp implements ProductService {
             throw new MappingException("inputProductDto");
         }
 
-        return productRepository.save(productMapperImp.toEntity(inputProductDto));
+        return productRepository.save(dtoToProductMapper.convert(inputProductDto));
     }
 
     @Override
@@ -52,8 +55,7 @@ public class ProductServiceImp implements ProductService {
             throw new MappingException("inputProductDto");
         }
 
-        //TODO делать валидацию по наличию id
-        Product product = productRepository.findById(inputProductDto.getId()).get();
+        Product product = productRepository.findById(inputProductDto.getId()).orElse(new Product()); //TODO Корректно ли так?;
         productRepository.deleteById(product.getId());
 
         if (inputProductDto.getCost() != null) {
@@ -86,9 +88,9 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
-    public List<Product> getPage(Integer page, Integer pageSize) {
+    public List<OutputProductDto> getPage(Integer page, Integer pageSize) {
         log.info("Получение списка товаров со страницы " + page.toString() + "с " + pageSize.toString() + " товарами");
-        return productRepository.findAll(PageRequest.of(page, pageSize)).getContent();
+        return productToDtoMapper.convertAll(productRepository.findAll(PageRequest.of(page, pageSize)).getContent());
     }
 
     //TODO Нормально ли что контролер получает лист или нужно делать отдеьное дто?

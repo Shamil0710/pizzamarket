@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,10 +16,11 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
+@Table(name = "order", schema = "mampiza")
 public class Order {
 
    @Id
-   @GeneratedValue
+   @GeneratedValue(strategy = GenerationType.SEQUENCE)
    private Long id;
 
    @NotNull
