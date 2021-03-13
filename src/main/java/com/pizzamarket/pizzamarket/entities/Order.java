@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
+//todo: analogichno
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

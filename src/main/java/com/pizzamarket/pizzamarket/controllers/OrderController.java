@@ -5,15 +5,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+//todo: клменты, жавадок
 @RestController
 public class OrderController {
 
-    @Autowired
-    private RedisConfig redisConfig;
-
     private List<Basket> getAl() {
 
-        redisConfig.redissonClient().
+//        redisConfig.redissonClient().
+        return null;
     }
 
 }

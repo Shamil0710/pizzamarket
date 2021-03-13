@@ -6,6 +6,10 @@ import lombok.Getter;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
+
+/**
+ * Исходящее дто товара
+ */
 @Getter
 @AllArgsConstructor
 public class OutputProductDto {

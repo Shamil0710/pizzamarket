@@ -4,6 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class MapperUtils {
 
+    public MapperUtils(){
+        throw new IllegalStateException("Service mapper class!");
+    }
+
     public static ObjectMapper MAPPER;
 
     static {

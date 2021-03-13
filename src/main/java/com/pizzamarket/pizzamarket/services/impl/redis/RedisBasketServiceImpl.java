@@ -1,4 +1,4 @@
-package com.pizzamarket.pizzamarket.services.redis;
+package com.pizzamarket.pizzamarket.services.impl.redis;
 
 import com.pizzamarket.pizzamarket.entities.Basket;
 import com.pizzamarket.pizzamarket.services.RedisBasketService;
@@ -12,9 +12,11 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-
+//todo: два RedisBasketService
+//todo: методы в интерфейс
 @Service
 public class RedisBasketServiceImpl implements RedisBasketService {
+
 
     @Autowired
     RedissonClient redissonClient;

@@ -6,6 +6,9 @@ import lombok.Getter;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * Входящее дто пользователя
+ */
 @Getter
 @AllArgsConstructor
 public class InputUserDto {

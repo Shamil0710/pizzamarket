@@ -6,28 +6,28 @@ import javax.persistence.*;
 
 import org.springframework.data.annotation.Id;
 
-import javax.persistence.GeneratedValue;
 import java.math.BigDecimal;
 
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
 @ToString
 @EqualsAndHashCode
+@Entity
+@Table(name = "product", schema = "mampiza")
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column
     @NonNull
+    @Column
     private BigDecimal cost;
 
-    @Column
     @NonNull
+    @Column
     private String title;
 
     @Column

@@ -10,8 +10,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 
+//todo: analogichno
 
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter

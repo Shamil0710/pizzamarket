@@ -1,13 +1,15 @@
-create schema if not exists "mampiza_schema";
+--liquibase formatted sql
 
-/* уточнить у ванька по поводу дропа таблиц */
+--changeset shamil001
+--drop schema if exists mampiza cascade;
 
+create schema if not exists "mampiza";
 create table if not exists "mampiza"."user"(
     "user_id"           BIGSERIAL NOT NULL unique ,
     "password"          VARCHAR NOT NULL,
     "first_name"        VARCHAR,
     "last_name"         VARCHAR,
-    "phone_number"      INT(8),
+    "phone_number"      INT(8) unique ,
     constraint user_table_pk primary key ("user_id")
 );
 

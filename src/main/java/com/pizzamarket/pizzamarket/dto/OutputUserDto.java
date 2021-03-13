@@ -6,6 +6,9 @@ import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * Исходящее дто пользователя
+ */
 @Getter
 @AllArgsConstructor
 public class OutputUserDto {

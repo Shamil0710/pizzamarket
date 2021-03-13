@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
 import java.util.Set;
 
+//todo: комменты, жавадок, @Table и тд
 @Entity
 @Getter
 @Setter
@@ -17,8 +18,10 @@ import java.util.Set;
 public class Role implements GrantedAuthority {
 
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id; //todo: где колонка аннотация?
     private String name;
+
     @Transient
     @ManyToMany(mappedBy = "roles")
     private Set<User> user;

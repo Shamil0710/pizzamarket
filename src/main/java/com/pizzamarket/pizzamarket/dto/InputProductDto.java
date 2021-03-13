@@ -8,8 +8,12 @@ import javax.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
+/**
+ * Входящее дто продукта
+ */
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class InputProductDto {
 
     /**

@@ -1,4 +1,4 @@
-package com.pizzamarket.pizzamarket.services.imp;
+package com.pizzamarket.pizzamarket.services.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pizzamarket.pizzamarket.Exceptions.NotFoundException;
@@ -20,9 +20,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+//todo: разбирайся с секьюром
 @Slf4j
 @Service
-public class UserServiceImp implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
@@ -39,10 +40,10 @@ public class UserServiceImp implements UserService, UserDetailsService {
      * @return
      */
     @Override
-    public User createUser(InputUserDto inputUserDto) {
+    public User saveUser(InputUserDto inputUserDto) {
 
         try {
-            log.info("Добавление пользователя", MapperUtils.MAPPER.writeValueAsString(inputUserDto));
+            log.info("Добавление пользователя {}", MapperUtils.MAPPER.writeValueAsString(inputUserDto));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             throw new MappingException("Ошибка маппинга inputUserDto");

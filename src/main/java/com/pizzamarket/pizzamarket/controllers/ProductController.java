@@ -2,11 +2,19 @@ package com.pizzamarket.pizzamarket.controllers;
 
 import com.pizzamarket.pizzamarket.dto.InputProductDto;
 import com.pizzamarket.pizzamarket.dto.OutputProductDto;
-import com.pizzamarket.pizzamarket.services.imp.ProductServiceImp;
-import com.pizzamarket.pizzamarket.services.mappers.imp.ProductMapperImp;
+import com.pizzamarket.pizzamarket.dto.RequestProductDto;
+import com.pizzamarket.pizzamarket.services.ProductService;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -44,7 +52,7 @@ public class ProductController {
      */
     @PutMapping(EndpointConstants.PUT_CREATE)
     void createProduct(@RequestBody InputProductDto inputProductDto) {
-        productServiceImp.createProduct(inputProductDto);
+        productService.createProduct(inputProductDto);
     }
 
     /**
@@ -53,7 +61,7 @@ public class ProductController {
      */
     @PutMapping(EndpointConstants.UPGRADE_PRODUCT)
     void upgradeProduct(@RequestBody InputProductDto inputProductDto) {
-        productServiceImp.upgradeProduct(inputProductDto);
+        productService.updateProduct(inputProductDto);
     }
 
     /**

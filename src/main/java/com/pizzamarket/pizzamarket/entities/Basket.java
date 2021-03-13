@@ -12,7 +12,7 @@ import javax.persistence.Entity;
 
 import java.util.List;
 
-
+//todo: комменты, жавадок, @Table и тд
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
