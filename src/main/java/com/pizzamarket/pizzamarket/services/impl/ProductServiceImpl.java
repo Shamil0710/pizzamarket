@@ -37,6 +37,7 @@ public class ProductServiceImp implements ProductService {
             throw new MappingException("inputProductDto");
         }
 
+        //TODO Сделать проверку на наличие id  базе
         return productRepository.save(dtoToProductMapper.convert(inputProductDto));
     }
 

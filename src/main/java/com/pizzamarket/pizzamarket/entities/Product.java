@@ -1,10 +1,10 @@
 package com.pizzamarket.pizzamarket.entities;
 
 import lombok.*;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import org.springframework.data.annotation.Id;
 
+import javax.persistence.*;
+
+import org.springframework.data.annotation.Id;
 
 import javax.persistence.GeneratedValue;
 import java.math.BigDecimal;
@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 public class Product {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column

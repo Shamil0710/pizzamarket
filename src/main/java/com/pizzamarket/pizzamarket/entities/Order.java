@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
@@ -38,4 +39,7 @@ public class Order {
 
    @Column
    private Instant timeOfOrdering;
+
+   @Column
+   private BigDecimal cost;
 }

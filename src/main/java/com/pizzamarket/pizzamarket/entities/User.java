@@ -26,12 +26,16 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+
     @Column(nullable = false)
     private String password;
+
     @Column
     private String firstName;
+
     @Column
     private String lastName;
+
     @Column(nullable = false)
     @Size(min = 8, max = 8)
     private Integer phoneNumber;

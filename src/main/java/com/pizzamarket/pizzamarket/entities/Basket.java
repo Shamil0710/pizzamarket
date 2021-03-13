@@ -23,6 +23,7 @@ public class Basket {
     @Column
     @NonNull
     private User user;
+
     @Column
     private List<Product> products;
 }
