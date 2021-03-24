@@ -7,20 +7,13 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-
 /**
- * Исходящее дто товара
+ * Дто для создания нового продукта
  */
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
-public class OutputProductDto {
-
-    /**
-     * id товара
-     */
-    @NotNull
-    private Long id;
+@AllArgsConstructor
+public class CreateProductDto {
 
     /**
      * Стоимость товара
@@ -40,7 +33,7 @@ public class OutputProductDto {
     private String description;
 
     /**
-     * Тег
+     * Тег помогающие группировать товары по разным категориям
      */
     private String tag;
 }

@@ -1,4 +1,4 @@
-package com.pizzamarket.pizzamarket.services.mappers.imp;
+package com.pizzamarket.pizzamarket.mappers.impl;
 
 import com.pizzamarket.pizzamarket.dto.InputUserDto;
 import com.pizzamarket.pizzamarket.entities.User;

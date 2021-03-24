@@ -1,24 +1,30 @@
 package com.pizzamarket.pizzamarket.services.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.pizzamarket.pizzamarket.Exceptions.NotFoundException;
+import com.pizzamarket.pizzamarket.Exceptions.UserNotFoundException;
+import com.pizzamarket.pizzamarket.dto.CreateUserDto;
 import com.pizzamarket.pizzamarket.dto.InputUserDto;
 import com.pizzamarket.pizzamarket.dto.OutputUserDto;
 import com.pizzamarket.pizzamarket.entities.User;
+import com.pizzamarket.pizzamarket.mappers.impl.CreateUserDtoToUserMapper;
+import com.pizzamarket.pizzamarket.mappers.impl.DtoToUserMapper;
+import com.pizzamarket.pizzamarket.mappers.impl.UserToDtoMapper;
 import com.pizzamarket.pizzamarket.repositorys.UserRepository;
 import com.pizzamarket.pizzamarket.services.UserService;
-import com.pizzamarket.pizzamarket.services.mappers.imp.DtoToUserMapper;
-import com.pizzamarket.pizzamarket.services.mappers.imp.UserToDtoMapper;
 import com.pizzamarket.pizzamarket.utils.MapperUtils;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mapping.MappingException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 //todo: разбирайся с секьюром
 @Slf4j
@@ -34,22 +40,34 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private DtoToUserMapper dtoToUserMapper;
 
+    @Autowired
+    private CreateUserDtoToUserMapper createUserDtoToUserMapper;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     /**
      * Метод добавления нового пользователя
-     * @param inputUserDto входящее дто
+     * @param createUserDto входящее дто
      * @return
      */
     @Override
-    public User saveUser(InputUserDto inputUserDto) {
-
+    public void saveUser(CreateUserDto createUserDto) {
         try {
-            log.info("Добавление пользователя {}", MapperUtils.MAPPER.writeValueAsString(inputUserDto));
+            log.info("Добавление пользователя {}", MapperUtils.MAPPER.writeValueAsString(createUserDto));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             throw new MappingException("Ошибка маппинга inputUserDto");
         }
 
-        return userRepository.save(dtoToUserMapper.convert(inputUserDto));
+        User user = new User();
+
+        user.setFirstName(createUserDto.getFirstName());
+        user.setLastName(createUserDto.getLastName());
+        user.setPhoneNumber(createUserDto.getPhoneNumber());
+        user.setPassword(bCryptPasswordEncoder.encode(createUserDto.getPassword()));
+
+        userRepository.save(user);
     }
 
     /**
@@ -67,11 +85,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
      * @param phoneNumber Номер телефона
      */
     @Override
-    public void deleteByPhoneNumber(Integer phoneNumber) {
+    public void deleteByPhoneNumber(String phoneNumber) {
         log.info("Удаление пользователя по номеру телеофа" + phoneNumber.toString() + "\n{}");
-        deleteById(userRepository.findByPhoneNumber(phoneNumber)
-                .orElseThrow(() -> new NotFoundException())  //TODO Да как бля
-                .getId());
+       userRepository.deleteById(userRepository.findByPhoneNumber(phoneNumber)
+                .orElseThrow(() -> new UserNotFoundException(
+                        String.format("Пользователь с номером телефона %s", phoneNumber))).getId());
     }
 
     /**
@@ -87,47 +105,43 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             throw new MappingException("inputUserDto");
         }
 
-        User user = userRepository.findById(inputUserDto.getId()).orElse(new User()); //TODO корректно ли так?
+       final User user = userRepository.findById(inputUserDto.getId()).orElseThrow(() -> new UserNotFoundException(
+                String.format("Пользователь с id= %s не найден", inputUserDto.getId())));
 
         userRepository.deleteById(inputUserDto.getId());
 
-        if(inputUserDto.getPhoneNumber() != null) {
             user.setPhoneNumber(inputUserDto.getPhoneNumber());
-        }
-        if(inputUserDto.getFirstName() != null) {
             user.setFirstName(inputUserDto.getFirstName());
-        }
-        if(inputUserDto.getId() != null) {
-            user.setId(inputUserDto.getId());
-        }
-        if(inputUserDto.getLastName() != null) {
             user.setLastName(inputUserDto.getLastName());
-        }
-        if(inputUserDto.getPassword() != null) {
             user.setPassword(inputUserDto.getPassword());
-        }
 
         userRepository.save(user);
     }
 
     /**
      * Получение пользователя по id
-     * @param id id пользователя //TODO ужно ли переделывать на получение дто?
+     * @param id id пользователя
      * @return
      */
     @Override
     public OutputUserDto findById(Long id) {
-        return userToDtoMapper.convert(userRepository.findById(id).orElseThrow()); //TODO как правильно работать с опционалом
+        log.info("Получение пользователя по ID {}" + id + "\n{}");
+
+        return userToDtoMapper.convert(userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(
+                String.format("Пользователь с id= %s не найден", id))));
     }
 
     /**
      * Получение пользователя по номеру телефона
-     * @param phoneNumber номер телефона //TODO ужно ли переделывать на получение дто?
+     * @param phoneNumber номер телефона
      * @return
      */
     @Override
-    public OutputUserDto findByPhoneNumber(Integer phoneNumber) {
-        return userToDtoMapper.convert(userRepository.findByPhoneNumber(phoneNumber).orElseThrow()); //TODO как правильно работать с опционалом
+    public OutputUserDto findByPhoneNumber(String phoneNumber) {
+        log.info("Получение пользователя по ID {}" + phoneNumber + "\n{}");
+
+        return userToDtoMapper.convert(userRepository.findByPhoneNumber(phoneNumber).orElseThrow(() -> new UserNotFoundException(
+                String.format("Пользователь с номером телефона %s не найден", phoneNumber))));
     }
 
     /**
@@ -135,18 +149,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
      * @return
      */
     public List<OutputUserDto> findAll() {
+        log.info("Получение полного списка пользователей");
+
         return userToDtoMapper.convertAll(userRepository.findAll());
     }
 
+    //TODO говно для сикюра
     //В моем случаи уникальным юсер неймом будет номер телефона
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException { //TODO нахуя? апд Разобратся с сраным сикьюром
-        User user = userRepository.findByUsername(userName);
+//        User user = userRepository.findByUsername(userName);
+//
+//        if (user == null) {
+//            throw new UsernameNotFoundException("User not found");
+//        }
 
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-
-        return user;
+        return null;
     }
 }

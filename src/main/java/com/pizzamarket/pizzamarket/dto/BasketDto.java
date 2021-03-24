@@ -8,21 +8,16 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * Входящее дто для формирования заказов
+ * Дто для работы с корзиной
  */
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class InputOrderDto {
+public class BasketDto {
 
-
+    //TODO стоит ли сюда добавить номер телефона?
     /**
-     * id заказа
+     * Перечень товаров в корзине
      */
-    Long id;
-
-    /**
-     * Список товаров для создания заказа
-     */
-    List<Product> products;
+    private List<Product> products;
 }

@@ -1,34 +1,34 @@
 --liquibase formatted sql
 
---changeset shamil001
---drop schema if exists mampiza cascade;
+--changeset: shamil001
 
-create schema if not exists "mampiza";
+--drop table if exists user cascade;
+--drop table if exists product cascade;
+--drop table if exists order cascade;
+
 create table if not exists "mampiza"."user"(
-    "user_id"           BIGSERIAL NOT NULL unique ,
+    "user_id"           BIGSERIAL primary key,
     "password"          VARCHAR NOT NULL,
     "first_name"        VARCHAR,
     "last_name"         VARCHAR,
-    "phone_number"      INT(8) unique ,
-    constraint user_table_pk primary key ("user_id")
+    "phone_number"      VARCHAR(8) unique ,
 );
 
 create table if not exists "mampiza"."product"(
-    "product_id"        BIGSERIAL NOT NULL unique ,
+    "product_id"        BIGSERIAL primary key,
     "cost"              NUMERIC(17, 2) NOT NULL,
     "title"             VARCHAR,
     "description"       VARCHAR,
     "tag"               VARCHAR,
-    constraint  proct_table_pk primary key ("product_id")
 );
 
 create table if not exists "mampiza"."order"(
-    "order_id"          BIGSERIAL NOT NULL unique ,
-    "user_id"           BIGSERIAL NOT NULL,
-    "product_id"        BIGSERIAL NOT NULL,
+    "order_id"          BIGSERIAL primary key,
+    "user_id"           BIGINT NOT NULL,
+    "product_id"        BIGINT NOT NULL,
     "time_of_ordering"  DATE,
     "cost"              NUMERIC (17, 2) NOT NULL,
-    constraint order_table_pk primary key ("order_id")
+
     constraint order_table_user_id_fk foreign key (user_id) references "mampiza_table"."user_table" (user_id) on delete cascade
     constraint order_table_producr_id_fk foreign key (product_id) references "mampiza_table"."product_table" (product_id) on derived cascade
 );

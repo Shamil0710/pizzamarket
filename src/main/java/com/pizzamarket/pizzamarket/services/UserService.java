@@ -1,5 +1,6 @@
 package com.pizzamarket.pizzamarket.services;
 
+import com.pizzamarket.pizzamarket.dto.CreateUserDto;
 import com.pizzamarket.pizzamarket.dto.InputUserDto;
 import com.pizzamarket.pizzamarket.dto.OutputUserDto;
 import com.pizzamarket.pizzamarket.entities.User;
@@ -11,10 +12,10 @@ public interface UserService {
 
     /**
      * Метод добавление пользователя в базу
-     * @param inputUserDto
+     * @param createUserDto
      * @return
      */
-    User saveUser(InputUserDto inputUserDto);
+    void saveUser(CreateUserDto createUserDto);
 
     /**
      * Метод удаления пользователя из базы
@@ -26,7 +27,7 @@ public interface UserService {
      * Удаление пользователя из базы
      * @param phoneNumber
      */
-    void deleteByPhoneNumber(Integer phoneNumber);
+    void deleteByPhoneNumber(String phoneNumber);
 
     /**
      * Обновление даных у пользователе
@@ -46,7 +47,7 @@ public interface UserService {
      * @param phoneNumber
      * @return
      */
-    OutputUserDto findByPhoneNumber(Integer phoneNumber);
+    OutputUserDto findByPhoneNumber(String phoneNumber);
 
     /**
      * Получение полного списка клиентов

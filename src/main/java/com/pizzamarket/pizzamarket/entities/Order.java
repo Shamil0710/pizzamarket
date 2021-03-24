@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -22,11 +22,11 @@ import java.util.List;
 public class Order {
 
    @Id
-   @GeneratedValue(strategy = GenerationType.SEQUENCE)
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "order_id")
    private Long id;
 
    @NotNull
-   @Column
    //    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
    //    @JoinColumn(name = "shop_log_id")
    //Много заказов один юсер
@@ -38,9 +38,9 @@ public class Order {
    @JoinColumn(name = "product_id", referencedColumnName = "order_id")
    private List<Product> products;
 
-   @Column
+   @Column(name = "time_of_ordering")
    private Instant timeOfOrdering;
 
-   @Column
+   @Column(name = "cost")
    private BigDecimal cost;
 }

@@ -4,8 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
-import org.springframework.data.annotation.Id;
-
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @AllArgsConstructor
@@ -16,23 +15,24 @@ import java.math.BigDecimal;
 @EqualsAndHashCode
 @Entity
 @Table(name = "product", schema = "mampiza")
-public class Product {
+public class Product implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id")
     private Long id;
 
     @NonNull
-    @Column
+    @Column(name = "cost")
     private BigDecimal cost;
 
     @NonNull
-    @Column
+    @Column(name = "title")
     private String title;
 
-    @Column
+    @Column(name = "description")
     private String description;
 
-    @Column
+    @Column(name = "tag")
     private String tag;
 }

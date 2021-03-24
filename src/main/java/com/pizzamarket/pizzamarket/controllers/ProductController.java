@@ -1,5 +1,7 @@
 package com.pizzamarket.pizzamarket.controllers;
 
+import com.pizzamarket.pizzamarket.constants.EndpointConstants;
+import com.pizzamarket.pizzamarket.dto.CreateProductDto;
 import com.pizzamarket.pizzamarket.dto.InputProductDto;
 import com.pizzamarket.pizzamarket.dto.OutputProductDto;
 import com.pizzamarket.pizzamarket.dto.RequestProductDto;
@@ -31,7 +33,7 @@ public class ProductController {
      * Метод получения полного перичня товаров
      * @return
      */
-    @GetMapping(EndpointConstants.GET_ALL)
+    @GetMapping(EndpointConstants.PRODUCT_GET_ALL)
     public List<OutputProductDto> getAllProduct() {
         return productService.getAll();
     }
@@ -41,25 +43,25 @@ public class ProductController {
      * @param productDto входной дто
      * @return
      */
-    @GetMapping(EndpointConstants.GET_PRODUCT_PAGE)
+    @GetMapping(EndpointConstants.PRODUCT_GET_PAGE)
     List<OutputProductDto> getPage(@PathVariable RequestProductDto productDto) {
         return productService.getPage(productDto.getPage(), productDto.getCount());
     }
 
     /**
      * Добавление нового продукта
-     * @param inputProductDto входное дто
+     * @param createProductDto входное дто
      */
-    @PutMapping(EndpointConstants.PUT_CREATE)
-    void createProduct(@RequestBody InputProductDto inputProductDto) {
-        productService.createProduct(inputProductDto);
+    @PutMapping(EndpointConstants.PRODUCT_PUT_CREATE)
+    void createProduct(@RequestBody CreateProductDto createProductDto) {
+        productService.createProduct(createProductDto);
     }
 
     /**
      * Одновление существующего товара
      * @param inputProductDto входное дто
      */
-    @PutMapping(EndpointConstants.UPGRADE_PRODUCT)
+    @PutMapping(EndpointConstants.PRODUCT_UPGRADE)
     void upgradeProduct(@RequestBody InputProductDto inputProductDto) {
         productService.updateProduct(inputProductDto);
     }
@@ -70,7 +72,7 @@ public class ProductController {
      * @param bindingResult возращает ошибки валидации
      * @return
      */
-    @PostMapping(EndpointConstants.GET_BY_TAGS)
+    @PostMapping(EndpointConstants.PRODUCT_GET_BY_TAGS)
     ResponseEntity<List<OutputProductDto>> getFilteredPages(@Valid RequestProductDto productDto, BindingResult bindingResult) {
         log.info("Запрос по тэгам");
         //При наличии оишбок валидации логируем ошибки и отдаем BAD_REQUEST
@@ -82,5 +84,12 @@ public class ProductController {
         return ResponseEntity.ok(productService.getByTag(productDto));
     }
 
-    //TODO Фильтрация по названию...
+    //TODO тестовый метод
+    @GetMapping("/test/{number}")
+    public ResponseEntity<String> test(@PathVariable String number){
+        orderRepository.findAllByUser_PhoneNumber(number);
+        orderRepository.findAllByUserPhoneNumber(number);
+        return ResponseEntity.ok("succass");
+    }
+
 }

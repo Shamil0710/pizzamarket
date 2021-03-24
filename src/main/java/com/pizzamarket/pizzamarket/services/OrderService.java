@@ -9,13 +9,13 @@ import java.util.List;
 
 public interface OrderService {
 
-    Order createOrder (InputUserDto inputUserDto, InputOrderDto inputOrderDto);
+    void createOrder (String phoneNumber);
 
     void deleteById (Long id);
 
-    void addProductToOder (InputOrderDto inputOrderDto);
+//    void addProductToOder (InputOrderDto inputOrderDto);
 
     List<OutputOrderDto> getAll ();
 
-    List<OutputOrderDto> findByPhoneNumber (Integer phoneNumber);
+    List<OutputOrderDto> findByPhoneNumber (String phoneNumber);
 }

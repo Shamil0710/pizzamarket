@@ -3,12 +3,13 @@ package com.pizzamarket.pizzamarket.config;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
+
+import org.redisson.spring.data.connection.RedissonConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.TimeToLive;
 
 @Configuration
 public class RedisConfig {
@@ -18,16 +19,20 @@ public class RedisConfig {
 
     //ip адрес хоста
     @Value("${spring.redis.host}")
-    private String redisHost = "127.0.0.1";
+    private String redisHost;
 
     //Порт хоста
     @Value("${spring.redis.port}")
-    private Integer redisPort = 6379;
+    private Integer redisPort;
 
-//    @Bean
-//    public RedisConnectionFactory redissonConnectionFactory(){
-//        return new RedissonConnectionFactory(redissonClient());
-//    }
+    @TimeToLive
+    @Value("${redis_ttl:3600000}")
+    private Long TTL;
+
+    @Bean
+    public RedisConnectionFactory redissonConnectionFactory(){
+        return new RedissonConnectionFactory(redissonClient());
+    }
 
     //Метод создания редис клиента
     @Bean(destroyMethod = "shutdown")

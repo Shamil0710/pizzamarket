@@ -1,22 +1,17 @@
 package com.pizzamarket.pizzamarket.services;
 
-import com.pizzamarket.pizzamarket.dto.InputProductDto;
-import com.pizzamarket.pizzamarket.dto.OutputProductDto;
-import com.pizzamarket.pizzamarket.dto.RequestProductDto;
-import com.pizzamarket.pizzamarket.entities.Product;
+import com.pizzamarket.pizzamarket.dto.*;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProductService {
 
     /**
      * Сохранение нового продукта
      *
-     * @param inputProductDto
-     * @return
+     * @param createUserDto
      */
-    Product createProduct(InputProductDto inputProductDto);
+    void createProduct(CreateProductDto createUserDto);
 
     /**
      * Метод удаление продукта по ID

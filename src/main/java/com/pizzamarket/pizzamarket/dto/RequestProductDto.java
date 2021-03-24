@@ -1,5 +1,6 @@
 package com.pizzamarket.pizzamarket.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,8 +11,9 @@ import java.util.List;
 /**
  * Класс запроса продуктов с пагинацией
  */
-@NoArgsConstructor
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class RequestProductDto {
 
     /**

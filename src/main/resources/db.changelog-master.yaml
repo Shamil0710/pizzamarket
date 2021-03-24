@@ -1,8 +1,0 @@
-databaseChangeLog:
-  -include:
-    -file: init.sql
-    -relativeToChangelogFile: true
-
-
-
-#todo скинуть настройку добавления файлов changeset

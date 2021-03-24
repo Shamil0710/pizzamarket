@@ -6,10 +6,11 @@ import com.pizzamarket.pizzamarket.dto.InputProductDto;
 import com.pizzamarket.pizzamarket.dto.OutputProductDto;
 import com.pizzamarket.pizzamarket.dto.RequestProductDto;
 import com.pizzamarket.pizzamarket.entities.Product;
+import com.pizzamarket.pizzamarket.mappers.impl.CreateProductDtoToProductMapper;
+import com.pizzamarket.pizzamarket.mappers.impl.DtoToProductMapper;
+import com.pizzamarket.pizzamarket.mappers.impl.ProductToDtoMapper;
 import com.pizzamarket.pizzamarket.repositorys.ProductRepository;
 import com.pizzamarket.pizzamarket.services.ProductService;
-import com.pizzamarket.pizzamarket.services.mappers.imp.DtoToProductMapper;
-import com.pizzamarket.pizzamarket.services.mappers.imp.ProductToDtoMapper;
 import com.pizzamarket.pizzamarket.utils.MapperUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,9 @@ import java.util.List;
 import java.util.Optional;
 
 
-//todo: комменты, жавадок, доработай сервис
+/**
+ * Сервис для работы с товарами
+ */
 @Slf4j
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -37,22 +40,33 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductToDtoMapper productToDtoMapper;
 
+    @Autowired
+    CreateProductDtoToProductMapper createProductDtoToProductMapper;
+
+    /**
+     * Метод создание нового товара
+     * @param createProductDto дто для создания нового обьекта
+     */
     @Override
-    public Product createProduct(InputProductDto inputProductDto) {
+    public void createProduct(CreateProductDto createProductDto) {
         try {
-            log.info("Добавление товара {}", MapperUtils.MAPPER.writeValueAsString(inputProductDto));
+            log.info("Добавление товара {}", MapperUtils.MAPPER.writeValueAsString(createProductDto));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             throw new MappingException("inputProductDto");
         }
 
-        //TODO Сделать проверку на наличие id  базе
-        return productRepository.save(dtoToProductMapper.convert(inputProductDto));
+        productRepository.save(createProductDtoToProductMapper.convert(createProductDto));
     }
 
+    /**
+     * Метод удаление товара по id
+     * @param id id товара
+     */
     @Override
     public void deleteById(Long id) {
         log.info("Удаление продукта с ID " + id.toString());
+
         productRepository.deleteById(id);
     }
 
@@ -87,25 +101,51 @@ public class ProductServiceImpl implements ProductService {
         productRepository.save(product);
     }
 
+    /**
+     * Получение товара по id
+     * @param id id товара
+     * @return
+     */
     @Override
     public OutputProductDto getById(Long id) {
-        return productToDtoMapper.convert(productRepository.findById(id).orElse(new Product()));
+        log.info("Получение товара по id= " + id.toString() + "\n{}");
+
+        return productToDtoMapper.convert(productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(
+                String.format("Продукт с id= %s не найден", id))));
     }
 
+    /**
+     * Получение полного списка товаров
+     * @return
+     */
     @Override
     public List<OutputProductDto> getAll() {
+        log.info("Получение полного списка товаров");
+
         return productToDtoMapper.convertAll(productRepository.findAll());
     }
 
+    /**
+     * Метод получение товаров с разбивкой на страницы
+     * @param page Нормер страницы
+     * @param pageSize Количество элементов на стринце
+     * @return
+     */
     @Override
     public List<OutputProductDto> getPage(Integer page, Integer pageSize) {
         log.info("Получение списка товаров со страницы " + page.toString() + "с " + pageSize.toString() + " товарами");
+
         return productToDtoMapper.convertAll(productRepository.findAll(PageRequest.of(page, pageSize)).getContent());
     }
 
+    /**
+     * Метод получения товаров с определенными тегами с разбивкой на страницы
+     * @param productDto входное дто
+     */
     @Override
     public List<OutputProductDto> getByTag(RequestProductDto productDto) {
         log.info("Получение товаров соотвествующих тегам \n{}", productDto.getTags());
+
         return productToDtoMapper.convertAll(
                 productRepository.findAllByTagIn(
                         productDto.getTags(), PageRequest.of(productDto.getPage(), productDto.getCount())).getContent());
