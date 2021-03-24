@@ -5,6 +5,7 @@ import com.pizzamarket.pizzamarket.dto.CreateProductDto;
 import com.pizzamarket.pizzamarket.dto.InputProductDto;
 import com.pizzamarket.pizzamarket.dto.OutputProductDto;
 import com.pizzamarket.pizzamarket.dto.RequestProductDto;
+import com.pizzamarket.pizzamarket.repositorys.OrderRepository;
 import com.pizzamarket.pizzamarket.services.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,9 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private OrderRepository orderRepository;
+
     /**
      * Метод получения полного перичня товаров
      * @return
@@ -45,7 +49,7 @@ public class ProductController {
      */
     @GetMapping(EndpointConstants.PRODUCT_GET_PAGE)
     List<OutputProductDto> getPage(@PathVariable RequestProductDto productDto) {
-        return productService.getPage(productDto.getPage(), productDto.getCount());
+        return productService.getProductPage(productDto.getPage(), productDto.getCount());
     }
 
     /**

@@ -48,7 +48,7 @@ public interface ProductService {
      * @param pageSize КОличество элементов на стринце
      * @return список продуктов
      */
-    List<OutputProductDto> getPage(Integer page, Integer pageSize);
+    List<OutputProductDto> getProductPage(Integer page, Integer pageSize);
 
     /**
      * Получение списка товара по тегам

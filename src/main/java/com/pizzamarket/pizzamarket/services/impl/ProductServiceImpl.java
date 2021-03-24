@@ -2,6 +2,8 @@ package com.pizzamarket.pizzamarket.services.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import com.pizzamarket.pizzamarket.Exceptions.ProductNotFoundException;
+import com.pizzamarket.pizzamarket.dto.CreateProductDto;
 import com.pizzamarket.pizzamarket.dto.InputProductDto;
 import com.pizzamarket.pizzamarket.dto.OutputProductDto;
 import com.pizzamarket.pizzamarket.dto.RequestProductDto;
@@ -13,15 +15,14 @@ import com.pizzamarket.pizzamarket.repositorys.ProductRepository;
 import com.pizzamarket.pizzamarket.services.ProductService;
 import com.pizzamarket.pizzamarket.utils.MapperUtils;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mapping.MappingException;
 import org.springframework.stereotype.Service;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.List;
-import java.util.Optional;
 
 
 /**
@@ -70,35 +71,32 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteById(id);
     }
 
+    //todo: для кастомных ошибок, и не только, но и в целом, нужно описать RestControllerAdvice
+
+    /**
+     * Метод обновления информации о товаре
+     * @param inputProductDto входное дто
+     */
     @Override
     public void updateProduct(InputProductDto inputProductDto) {
         try {
             log.info("Обновление товара {}", MapperUtils.MAPPER.writeValueAsString(inputProductDto));
+
+            final Product product = productRepository.findById(inputProductDto.getId())
+                    .orElseThrow(() -> new ProductNotFoundException(
+                            String.format("Продукт с id= %s не найден", inputProductDto.getId())));
+
+            product.setCost(inputProductDto.getCost());
+            product.setDescription(inputProductDto.getDescription());
+            product.setTag(inputProductDto.getTag());
+            product.setTitle(inputProductDto.getTitle());
+
+            productRepository.save(product);
+
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             throw new MappingException("inputProductDto");
         }
-
-        Product product = productRepository.findById(inputProductDto.getId()).orElse(new Product()); //TODO Корректно ли так?;
-        productRepository.deleteById(product.getId());
-
-        if (inputProductDto.getCost() != null) {
-            product.setCost(inputProductDto.getCost());
-        }
-        if (inputProductDto.getDescription() != null) {
-            product.setDescription(inputProductDto.getDescription());
-        }
-        if (inputProductDto.getId() != null) {
-            product.setTitle(inputProductDto.getTitle());
-        }
-        if (inputProductDto.getTag() != null) {
-            product.setTag(inputProductDto.getTag());
-        }
-        if (inputProductDto.getId() != null) {
-            product.setId(inputProductDto.getId());
-        }
-
-        productRepository.save(product);
     }
 
     /**
@@ -132,7 +130,7 @@ public class ProductServiceImpl implements ProductService {
      * @return
      */
     @Override
-    public List<OutputProductDto> getPage(Integer page, Integer pageSize) {
+    public List<OutputProductDto> getProductPage(Integer page, Integer pageSize) {
         log.info("Получение списка товаров со страницы " + page.toString() + "с " + pageSize.toString() + " товарами");
 
         return productToDtoMapper.convertAll(productRepository.findAll(PageRequest.of(page, pageSize)).getContent());

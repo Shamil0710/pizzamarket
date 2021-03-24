@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
+//todo: разделить дто на create product и update product
 /**
  * Входящее дто продукта
  */
