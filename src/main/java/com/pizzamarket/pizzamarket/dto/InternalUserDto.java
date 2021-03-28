@@ -7,13 +7,16 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/**
- * дто пользователя с информацией необходимой для создание нового пользователя
- */
+
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
-public class CreateUserDto {
+@NoArgsConstructor
+public class InternalUserDto {
+
+    /**
+     * Id пользователя
+     */
+    private Long id;
 
     /**
      * Имя пользователя
@@ -34,16 +37,4 @@ public class CreateUserDto {
     @NotNull
     private String phoneNumber;
 
-    /**
-     * Пароль
-     */
-    @NotNull
-    private String password;
-
-    /**
-     * Уровень доступа пользователя
-     */
-    @NotNull
-    private String role;
 }
-

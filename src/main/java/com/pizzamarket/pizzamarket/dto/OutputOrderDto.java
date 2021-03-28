@@ -29,13 +29,13 @@ public class OutputOrderDto {
      * Пользователь которому пренадлежить заказ
      */
     @NotNull
-    private User user;
+    private InternalUserDto user;
 
     /**
      * Список товаров в заказе
      */
     @NotNull
-    private List<Product> products;
+    private List<OutputProductDto> products;
 
     /**
      * Время формирование заказа

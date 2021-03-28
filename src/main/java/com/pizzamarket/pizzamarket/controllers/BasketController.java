@@ -2,6 +2,7 @@ package com.pizzamarket.pizzamarket.controllers;
 
 import com.pizzamarket.pizzamarket.constants.EndpointConstants;
 import com.pizzamarket.pizzamarket.dto.BasketDto;
+import com.pizzamarket.pizzamarket.dto.InputProductDto;
 import com.pizzamarket.pizzamarket.services.BasketService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,34 +30,35 @@ public class BasketController {
 
     /**
      * Метод для создания новой карзины
-     * @param phoneNumber Номер телефона
      * @param basketDto дто корзины
      */
     @PutMapping(value = EndpointConstants.BASKET_PUT_CREATE)
-    void createBasket(@RequestBody String phoneNumber, @RequestBody BasketDto basketDto) {
+    void createBasket(@RequestBody BasketDto basketDto) {
+        log.info("Создание новой корзины");
 
-        basketService.createBasket(phoneNumber, basketDto);
+        basketService.createBasket(basketDto);
     }
 
     /**
      * Метод добавления товара в корзины
-     * @param phoneNumber Номер телефона
      * @param basketDto дто корзины
      */
     @PutMapping(value = EndpointConstants.BASKET_PUT_ADD_TO_BASKET)
-    void addProductToBasket(@RequestBody String phoneNumber, @RequestBody BasketDto basketDto) {
+    void addProductToBasket(@RequestBody BasketDto basketDto) {
+        log.info("Обновление информации о продукте");
 
-        basketService.addProductToBasket(phoneNumber, basketDto);
+        basketService.addProductToBasket(basketDto);
     }
 
     /**
      * Метод удаления товара из корзины
-     * @param phoneNumber
      * @param basketDto
      */
     @DeleteMapping(value = EndpointConstants.BASKET_DELETE_PRODUCT_IN_BASKET)
-    void deleteProductInBasket(@RequestBody String phoneNumber, @RequestBody BasketDto basketDto) {
-        //TODO еализовать ЭТО
+    void deleteProductInBasket(@RequestBody BasketDto basketDto, @RequestBody InputProductDto inputProductDto) {
+        log.info("Удаление продукта из корзины с номером " + basketDto.getPhoneNumber() + "\n{}");
+
+        basketService.deleteProductInBasket(basketDto, inputProductDto);
     }
 
     /**
@@ -66,6 +68,7 @@ public class BasketController {
      */
     @GetMapping(value = EndpointConstants.BASKET_GET_BASKET)
     BasketDto getBasket(@RequestBody String phoneNumber) {
+        log.info("Получение корзины по номеру " + phoneNumber + "\n{}");
 
         return basketService.getBasket(phoneNumber);
     }

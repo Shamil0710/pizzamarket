@@ -24,5 +24,5 @@ public class InputOrderDto {
     /**
      * Список товаров для создания заказа
      */
-    List<Product> products;
+    List<InputProductDto> products;
 }

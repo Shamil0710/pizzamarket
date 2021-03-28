@@ -11,6 +11,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.TimeToLive;
 
+/**
+ * Конфигурации для редиса
+ */
 @Configuration
 public class RedisConfig {
 
@@ -29,6 +32,10 @@ public class RedisConfig {
     @Value("${redis_ttl:3600000}")
     private Long TTL;
 
+    /**
+     * Предоставляет клиент редиса
+     * @return
+     */
     @Bean
     public RedisConnectionFactory redissonConnectionFactory(){
         return new RedissonConnectionFactory(redissonClient());

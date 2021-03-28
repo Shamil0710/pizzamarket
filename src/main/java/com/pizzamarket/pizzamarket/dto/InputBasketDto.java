@@ -16,11 +16,11 @@ public class InputBasketDto {
      * Пользователь
      */
     @NonNull
-    private User user;
+    private InternalUserDto user;
 
     /**
      * Перечень заказов
      */
     @Column
-    private List<Product> products;
+    private List<InputProductDto> products;
 }

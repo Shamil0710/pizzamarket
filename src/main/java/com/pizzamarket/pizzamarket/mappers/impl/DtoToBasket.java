@@ -9,7 +9,8 @@ public class DtoToBasket implements com.pizzamarket.pizzamarket.services.mappers
     @Override
     public Basket convert(BasketDto pojo) {
 
-        Basket basket = new Basket(pojo.getProducts());
+        Basket basket = new Basket();
+        basket.setProducts(basket.getProducts());
 
         return basket;
     }

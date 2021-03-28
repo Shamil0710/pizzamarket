@@ -11,7 +11,8 @@ create table if not exists "mampiza"."user"(
     "password"          VARCHAR NOT NULL,
     "first_name"        VARCHAR,
     "last_name"         VARCHAR,
-    "phone_number"      VARCHAR(8) unique ,
+    "phone_number"      VARCHAR(8) unique,
+    "user_roles"        //TODO какой тип указывать для сета
 );
 
 create table if not exists "mampiza"."product"(
@@ -32,4 +33,10 @@ create table if not exists "mampiza"."order"(
     constraint order_table_user_id_fk foreign key (user_id) references "mampiza_table"."user_table" (user_id) on delete cascade
     constraint order_table_producr_id_fk foreign key (product_id) references "mampiza_table"."product_table" (product_id) on derived cascade
 );
+
+create table if not exists "mampiza"."roles"(
+    "roles_id"          BIGSERIAL primary key,
+    "roles_name"        VARCHAR,
+
+)
 

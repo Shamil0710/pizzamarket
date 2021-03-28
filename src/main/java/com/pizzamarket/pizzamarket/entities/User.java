@@ -9,9 +9,12 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Set;
 
-//todo: analogichno
 
+/**
+ * Сущность отображающая пользователя
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -23,36 +26,61 @@ import java.util.Collection;
 @Table(name = "user", schema = "mampiza")
 public class User implements UserDetails, Serializable {
 
+    /**
+     * id пользователя
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
 
+    /**
+     * Пароль пользователя
+     */
     @Column(name = "password", nullable = false)
     private String password;
 
+    /**
+     * Имя пользователя
+     */
     @Column(name = "first_name")
     private String firstName;
 
+    /**
+     * Фамилия пользователя
+     */
     @Column(name = "last_name")
     private String lastName;
 
+    /**
+     * Номер телефона, он же выполняет фкнкции логина
+     */
     @Column(name = "phone_number", nullable = false)
     @Size(min = 8, max = 8)
     private String phoneNumber;
+
+    @Transient
+    private String passwordConfirm;
+
+    /**
+     * Список ролей
+     */
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Column(name = "user_roles", nullable = false)
+    private Set<Role> roles;
 
 
     //Имплементация интерфейса UserDetails необходимого для работы СпрингСикъюра
     @Transient
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return getRoles();
     }
 
     @Transient
     @Override
     public String getUsername() {
-        return null;
+        return phoneNumber;
     }
 
     @Transient

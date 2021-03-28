@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Репозиторий для работы с заказами
+ */
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 

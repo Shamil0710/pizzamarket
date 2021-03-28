@@ -12,7 +12,9 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
-//todo: analogichno
+/**
+ * Сущность отображающая заказ
+ */
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,11 +23,17 @@ import java.util.List;
 @Table(name = "order", schema = "mampiza")
 public class Order {
 
+   /**
+    * Id заказа
+    */
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Column(name = "order_id")
    private Long id;
 
+   /**
+    * Пользователь которому пренадлежит заказ
+    */
    @NotNull
    //    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
    //    @JoinColumn(name = "shop_log_id")
@@ -34,13 +42,22 @@ public class Order {
    @JoinColumn(name = "user_id")
    private User user;
 
+   /**
+    * Список продуктов в заказе
+    */
    @OneToMany
    @JoinColumn(name = "product_id", referencedColumnName = "order_id")
    private List<Product> products;
 
+   /**
+    * Время создания заказа
+    */
    @Column(name = "time_of_ordering")
    private Instant timeOfOrdering;
 
+   /**
+    * Стоимость заказа
+    */
    @Column(name = "cost")
    private BigDecimal cost;
 }

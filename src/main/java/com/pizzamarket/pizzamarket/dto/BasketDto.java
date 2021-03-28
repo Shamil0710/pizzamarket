@@ -1,6 +1,5 @@
 package com.pizzamarket.pizzamarket.dto;
 
-import com.pizzamarket.pizzamarket.entities.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,5 +18,10 @@ public class BasketDto {
     /**
      * Перечень товаров в корзине
      */
-    private List<Product> products;
+    private List<InputProductDto> products;
+
+    /**
+     * Номер телефона
+     */
+    private String phoneNumber;
 }

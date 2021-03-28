@@ -39,6 +39,8 @@ public class ProductController {
      */
     @GetMapping(EndpointConstants.PRODUCT_GET_ALL)
     public List<OutputProductDto> getAllProduct() {
+        log.info("Получение полного списка продуктов");
+
         return productService.getAll();
     }
 
@@ -49,6 +51,9 @@ public class ProductController {
      */
     @GetMapping(EndpointConstants.PRODUCT_GET_PAGE)
     List<OutputProductDto> getPage(@PathVariable RequestProductDto productDto) {
+        log.info("Получение страницы № " + productDto.getPage().toString() + " c "
+                + productDto.getCount().toString() + " товарами" + "\n{}");
+
         return productService.getProductPage(productDto.getPage(), productDto.getCount());
     }
 
@@ -58,6 +63,8 @@ public class ProductController {
      */
     @PutMapping(EndpointConstants.PRODUCT_PUT_CREATE)
     void createProduct(@RequestBody CreateProductDto createProductDto) {
+        log.info("Создание нового продукта");
+
         productService.createProduct(createProductDto);
     }
 
@@ -66,7 +73,9 @@ public class ProductController {
      * @param inputProductDto входное дто
      */
     @PutMapping(EndpointConstants.PRODUCT_UPGRADE)
-    void upgradeProduct(@RequestBody InputProductDto inputProductDto) {
+    void upgradeProduct(@RequestBody InputProductDto inputProductDto) { //TODO изменить дто
+        log.info("Обновление информации о продукцте " + inputProductDto.toString() + "\n{}");
+
         productService.updateProduct(inputProductDto);
     }
 

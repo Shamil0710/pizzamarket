@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 
+/**
+ * Репозиторий для работы с продуктами
+ */
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 

@@ -4,6 +4,7 @@ import com.pizzamarket.pizzamarket.constants.EndpointConstants;
 import com.pizzamarket.pizzamarket.dto.CreateUserDto;
 import com.pizzamarket.pizzamarket.dto.OutputUserDto;
 import com.pizzamarket.pizzamarket.services.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.List;
 /**
  * Контролер для доступа к пользователям
  */
+@Slf4j
 @RestController(value = EndpointConstants.USER)
 public class UsersController {
 
@@ -23,13 +25,14 @@ public class UsersController {
 //    @Autowired
 //    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
     /**
      * ПОлучение полного списка пользователей
      * @return
      */
     @GetMapping(EndpointConstants.USER_GET_ALL)
     public List<OutputUserDto> allUsers() {
+        log.info("Получение полного списка пользователей");
+
        return userService.findAll();
     }
 
@@ -41,6 +44,8 @@ public class UsersController {
     @GetMapping(EndpointConstants.USER_GET_BY_USERID)
     public @ResponseBody
     OutputUserDto getUserById(@PathVariable Long userId) {
+        log.info("Получение пользователя по id " + userId.toString() + "\n{}");
+
         return userService.findById(userId);
     }
 
@@ -52,6 +57,8 @@ public class UsersController {
     @GetMapping(EndpointConstants.USER_GET_BY_PHONENUMBER)
     public @ResponseBody
     OutputUserDto getUserByPhoneNumber(@PathVariable String phoneNumber) {
+        log.info("Получение пользователя по номеру телефона " + phoneNumber + "\n{}");
+
         return userService.findByPhoneNumber(phoneNumber);
     }
 
@@ -61,9 +68,9 @@ public class UsersController {
      */
     @PutMapping(EndpointConstants.USER_PUT_CREATE)
     public void createUser(@RequestBody CreateUserDto inputUserDto) {
+        log.info("Создание нового пользователя");
+
         userService.saveUser(inputUserDto);
     }
-
-    //TODO подумать о эксепшенах
 
 }

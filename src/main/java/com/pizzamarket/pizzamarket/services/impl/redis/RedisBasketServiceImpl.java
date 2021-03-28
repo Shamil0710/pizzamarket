@@ -3,7 +3,6 @@ package com.pizzamarket.pizzamarket.services.impl.redis;
 import com.pizzamarket.pizzamarket.dto.BasketDto;
 import com.pizzamarket.pizzamarket.entities.Product;
 import com.pizzamarket.pizzamarket.entities.redis.Basket;
-import com.pizzamarket.pizzamarket.mappers.impl.BasketToDto;
 import com.pizzamarket.pizzamarket.mappers.impl.DtoToBasket;
 import com.pizzamarket.pizzamarket.mappers.impl.DtoToProductMapper;
 import com.pizzamarket.pizzamarket.services.ProductService;
@@ -38,8 +37,8 @@ public class RedisBasketServiceImpl implements RedisBasketService {
     @Autowired
     DtoToBasket dtoToBasket;
 
-    @Autowired
-    BasketToDto basketToDto;
+//    @Autowired
+//    BasketToDto basketToDto;
 
     @Autowired
     DtoToProductMapper dtoToProductMapper;

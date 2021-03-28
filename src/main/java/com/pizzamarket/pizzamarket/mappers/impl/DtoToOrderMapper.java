@@ -3,6 +3,7 @@ package com.pizzamarket.pizzamarket.mappers.impl;
 import com.pizzamarket.pizzamarket.dto.InputOrderDto;
 import com.pizzamarket.pizzamarket.entities.Order;
 import com.pizzamarket.pizzamarket.services.mappers.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,11 +12,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class DtoToOrderMapper implements Mapper<InputOrderDto, Order> {
 
+    @Autowired
+    DtoToProductMapper dtoToProductMapper;
+
     @Override
     public Order convert(InputOrderDto pojo) {
         final Order order = new Order();
 
-        order.setProducts(pojo.getProducts());
+        order.setProducts(dtoToProductMapper.convertAll(pojo.getProducts()));
 
         return order;
     }

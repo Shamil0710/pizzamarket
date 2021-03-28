@@ -5,8 +5,8 @@ import com.pizzamarket.pizzamarket.Exceptions.UserNotFoundException;
 import com.pizzamarket.pizzamarket.dto.CreateUserDto;
 import com.pizzamarket.pizzamarket.dto.InputUserDto;
 import com.pizzamarket.pizzamarket.dto.OutputUserDto;
+import com.pizzamarket.pizzamarket.entities.Role;
 import com.pizzamarket.pizzamarket.entities.User;
-import com.pizzamarket.pizzamarket.mappers.impl.CreateUserDtoToUserMapper;
 import com.pizzamarket.pizzamarket.mappers.impl.DtoToUserMapper;
 import com.pizzamarket.pizzamarket.mappers.impl.UserToDtoMapper;
 import com.pizzamarket.pizzamarket.repositorys.UserRepository;
@@ -41,9 +41,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private DtoToUserMapper dtoToUserMapper;
 
     @Autowired
-    private CreateUserDtoToUserMapper createUserDtoToUserMapper;
-
-    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
@@ -61,11 +58,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
 
         User user = new User();
+        Role role = new Role();
+        role.setName(createUserDto.getRole());
 
         user.setFirstName(createUserDto.getFirstName());
         user.setLastName(createUserDto.getLastName());
         user.setPhoneNumber(createUserDto.getPhoneNumber());
         user.setPassword(bCryptPasswordEncoder.encode(createUserDto.getPassword()));
+        user.getRoles().add(role); //TODO чёт хуета, подумать на свежу голову
 
         userRepository.save(user);
     }
@@ -157,13 +157,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     //TODO говно для сикюра
     //В моем случаи уникальным юсер неймом будет номер телефона
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException { //TODO нахуя? апд Разобратся с сраным сикьюром
-//        User user = userRepository.findByUsername(userName);
-//
-//        if (user == null) {
-//            throw new UsernameNotFoundException("User not found");
-//        }
+    public UserDetails loadUserByUsername(String phoneNumber) throws UsernameNotFoundException { //TODO нахуя? апд Разобратся с сраным сикьюром
 
-        return null;
+        return userRepository.findByPhoneNumber(phoneNumber).orElseThrow(() -> new UsernameNotFoundException(
+                String.format("Пользователь с номером телефона %s не найден", phoneNumber)));
     }
 }

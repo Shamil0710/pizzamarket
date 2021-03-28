@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 
+/**
+ * Репозиторий для работы с клиентами
+ */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
