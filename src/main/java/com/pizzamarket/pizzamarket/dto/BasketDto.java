@@ -14,7 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 public class BasketDto {
 
-    //TODO стоит ли сюда добавить номер телефона?
     /**
      * Перечень товаров в корзине
      */

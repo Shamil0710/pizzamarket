@@ -1,9 +1,8 @@
 package com.pizzamarket.pizzamarket.services.impl.redis;
 
-import com.pizzamarket.pizzamarket.dto.BasketDto;
 import com.pizzamarket.pizzamarket.entities.Product;
 import com.pizzamarket.pizzamarket.entities.redis.Basket;
-import com.pizzamarket.pizzamarket.mappers.impl.DtoToBasket;
+import com.pizzamarket.pizzamarket.mappers.impl.DtoToBasketMapper;
 import com.pizzamarket.pizzamarket.mappers.impl.DtoToProductMapper;
 import com.pizzamarket.pizzamarket.services.ProductService;
 import com.pizzamarket.pizzamarket.services.RedisBasketService;
@@ -35,7 +34,7 @@ public class RedisBasketServiceImpl implements RedisBasketService {
     ProductService productService;
 
     @Autowired
-    DtoToBasket dtoToBasket;
+    DtoToBasketMapper dtoToBasketMapper;
 
 //    @Autowired
 //    BasketToDto basketToDto;
@@ -79,11 +78,12 @@ public class RedisBasketServiceImpl implements RedisBasketService {
 
     //Получение и удаление по ключу
     @Override
-    public BasketDto getBasket(@NotNull String key) {
+    public Basket getBasket(@NotNull String key) {
         log.info("Получение и удаление карзины по ключу " + key + "\n{}");
 
         final RBucket<Basket> rBucket = redissonClient.getBucket(key);
-        return basketToDto.convert(rBucket.getAndDelete());
+//        return basketToDto.convert(rBucket.getAndDelete());
+        return rBucket.get();
     }
 
     //Добавление товара в корзину

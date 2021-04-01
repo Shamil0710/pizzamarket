@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         EndpointConstants.PRODUCT_GET_ALL, EndpointConstants.PRODUCT_GET_BY_TAGS,
                         EndpointConstants.PRODUCT_GET_PAGE).hasRole("USER")
                 //Все остальные страницы требуют аутентификации
-                .anyRequest().authenticated()
+                .anyRequest().authenticated() //TODO Проверить
                 .and()
                 //Настройка для входа в систему
                 .formLogin()

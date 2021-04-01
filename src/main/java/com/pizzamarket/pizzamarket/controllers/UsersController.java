@@ -22,9 +22,6 @@ public class UsersController {
     @Autowired
     private UserService userService;
 
-//    @Autowired
-//    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
     /**
      * ПОлучение полного списка пользователей
      * @return

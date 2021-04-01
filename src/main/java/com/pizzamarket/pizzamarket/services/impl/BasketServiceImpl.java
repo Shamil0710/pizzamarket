@@ -2,8 +2,10 @@ package com.pizzamarket.pizzamarket.services.impl;
 
 import com.pizzamarket.pizzamarket.dto.BasketDto;
 import com.pizzamarket.pizzamarket.dto.InputProductDto;
-import com.pizzamarket.pizzamarket.mappers.impl.DtoToBasket;
+import com.pizzamarket.pizzamarket.mappers.impl.DtoToBasketMapper;
 import com.pizzamarket.pizzamarket.mappers.impl.DtoToProductMapper;
+import com.pizzamarket.pizzamarket.mappers.impl.ProductToDtoMapper;
+import com.pizzamarket.pizzamarket.mappers.impl.ProductToInputDtoMapper;
 import com.pizzamarket.pizzamarket.services.BasketService;
 import com.pizzamarket.pizzamarket.services.RedisBasketService;
 
@@ -23,10 +25,16 @@ public class BasketServiceImpl implements BasketService {
     RedisBasketService redisBasketService;
 
     @Autowired
-    DtoToBasket dtoToBasket;
+    DtoToBasketMapper dtoToBasketMapper;
 
     @Autowired
     DtoToProductMapper dtoToProductMapper;
+
+    @Autowired
+    ProductToDtoMapper productToDtoMapper;
+
+    @Autowired
+    ProductToInputDtoMapper productToInputDtoMapper;
 
 //    @Autowired
 //    BasketToDto basketToDto;
@@ -40,7 +48,7 @@ public class BasketServiceImpl implements BasketService {
     public void createBasket(BasketDto basketDto) {
         log.info("Создание коризны по номеру " + basketDto.getPhoneNumber() + "С товарами" + basketDto.getProducts().toString() + "\n{}");
 
-        redisBasketService.setValue(basketDto.getPhoneNumber(), dtoToBasket.convert(basketDto));
+        redisBasketService.setValue(basketDto.getPhoneNumber(), dtoToBasketMapper.convert(basketDto));
     }
 
     /**
@@ -67,12 +75,13 @@ public class BasketServiceImpl implements BasketService {
 
     /**
      * Метод получение корзины по номеру телефона
-     * @param phoneNumber дто корзины
+     * @param phoneNumber номер телефона
      * @return
      */
     @Override
     public BasketDto getBasket(String phoneNumber) {
-        BasketDto basketDto = new BasketDto(redisBasketService.getBasket(phoneNumber).getProducts(), phoneNumber);
+        //TODO Костыль с дто, я заебался, пусть пока так
+        BasketDto basketDto = new BasketDto(productToInputDtoMapper.convertAll(redisBasketService.getBasket(phoneNumber).getProducts()), phoneNumber);
 
         return basketDto;
     }

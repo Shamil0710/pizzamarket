@@ -22,12 +22,6 @@ public class BasketController {
     BasketService basketService;
 
 
-//    @PutMapping(value = EndpointConstants.ORDER_PUT_CREATE)
-//    void createOrder(@RequestBody String phoneNumber) {
-//
-//        orderService.createOrder(phoneNumber);
-//    }
-
     /**
      * Метод для создания новой карзины
      * @param basketDto дто корзины

@@ -18,7 +18,7 @@ public interface RedisBasketService {
     <V>List<V> getList(@NotNull String key);
 
     //Получение и удаление по ключу
-    BasketDto getBasket(@NotNull String key);
+    Basket getBasket(@NotNull String key);
 
     //Добавление товара в корзну
     <V>void addToBasket(@NotNull String key, List<Product> products);

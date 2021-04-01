@@ -5,7 +5,7 @@ import com.pizzamarket.pizzamarket.entities.redis.Basket;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DtoToBasket implements com.pizzamarket.pizzamarket.services.mappers.Mapper<BasketDto, Basket> {
+public class DtoToBasketMapper implements com.pizzamarket.pizzamarket.services.mappers.Mapper<BasketDto, Basket> {
     @Override
     public Basket convert(BasketDto pojo) {
 
