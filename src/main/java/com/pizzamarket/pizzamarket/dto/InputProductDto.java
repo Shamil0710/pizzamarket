@@ -38,5 +38,9 @@ public class InputProductDto {
      * Описание товара
      */
     private String description;
-    private String teg;
+
+    /**
+     * Тег помогающие группировать товары по разным категориям
+     */
+    private String tag;
 }
