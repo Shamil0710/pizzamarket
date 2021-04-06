@@ -29,25 +29,26 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
-    OrderRepository orderRepository;
+    private OrderRepository orderRepository;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    RedisBasketService redisBasketService;
+    private RedisBasketService redisBasketService;
 
     @Autowired
-    DtoToUserMapper dtoToUserMapper;
+    private DtoToUserMapper dtoToUserMapper;
 
     @Autowired
-    OrderToDtoMapper orderToDtoMapper;
+    private OrderToDtoMapper orderToDtoMapper;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     /**
      * Метод создания нового заказа
+     *
      * @param phoneNumber
      */
     @Override
@@ -70,6 +71,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * Удаление заказа по id
+     *
      * @param id
      */
     @Override
@@ -88,6 +90,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * Получение полного списка заказов
+     *
      * @return
      */
     @Override
@@ -99,6 +102,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * Получение заказов по нормеру телефона
+     *
      * @param phoneNumber
      * @return
      */

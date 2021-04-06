@@ -19,11 +19,12 @@ import org.springframework.web.bind.annotation.*;
 public class BasketController {
 
     @Autowired
-    BasketService basketService;
+    private BasketService basketService;
 
 
     /**
      * Метод для создания новой карзины
+     *
      * @param basketDto дто корзины
      */
     @PutMapping(value = EndpointConstants.BASKET_PUT_CREATE)
@@ -35,6 +36,7 @@ public class BasketController {
 
     /**
      * Метод добавления товара в корзины
+     *
      * @param basketDto дто корзины
      */
     @PutMapping(value = EndpointConstants.BASKET_PUT_ADD_TO_BASKET)
@@ -46,6 +48,7 @@ public class BasketController {
 
     /**
      * Метод удаления товара из корзины
+     *
      * @param basketDto
      */
     @DeleteMapping(value = EndpointConstants.BASKET_DELETE_PRODUCT_IN_BASKET)
@@ -57,6 +60,7 @@ public class BasketController {
 
     /**
      * Метод получение корзины по номеру телефона
+     *
      * @param phoneNumber номер телефона
      * @return
      */

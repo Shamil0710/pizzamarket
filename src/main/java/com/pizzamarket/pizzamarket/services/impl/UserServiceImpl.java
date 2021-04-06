@@ -9,6 +9,7 @@ import com.pizzamarket.pizzamarket.entities.Role;
 import com.pizzamarket.pizzamarket.entities.User;
 import com.pizzamarket.pizzamarket.mappers.impl.DtoToUserMapper;
 import com.pizzamarket.pizzamarket.mappers.impl.UserToDtoMapper;
+import com.pizzamarket.pizzamarket.repositorys.RoleRepository;
 import com.pizzamarket.pizzamarket.repositorys.UserRepository;
 import com.pizzamarket.pizzamarket.services.UserService;
 import com.pizzamarket.pizzamarket.utils.MapperUtils;
@@ -43,6 +44,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
     /**
      * Метод добавления нового пользователя
      * @param createUserDto входящее дто
@@ -56,17 +60,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             e.printStackTrace();
             throw new MappingException("Ошибка маппинга inputUserDto");
         }
-
-        User user = new User();
-        Role role = new Role();
-        role.setName(createUserDto.getRole());
-
+        final Role userRole = roleRepository.findByName(createUserDto.getRole())
+                .orElseThrow(() -> new IllegalArgumentException("Не найдена роль" + createUserDto.getRole()));
+        final User user = new User();
         user.setFirstName(createUserDto.getFirstName());
         user.setLastName(createUserDto.getLastName());
         user.setPhoneNumber(createUserDto.getPhoneNumber());
         user.setPassword(bCryptPasswordEncoder.encode(createUserDto.getPassword()));
-        user.getRoles().add(role); //TODO чёт хуета, подумать на свежу голову
-
+        user.getRoles().add(userRole);
         userRepository.save(user);
     }
 

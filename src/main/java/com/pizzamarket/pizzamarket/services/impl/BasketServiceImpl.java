@@ -22,19 +22,19 @@ import org.springframework.stereotype.Service;
 public class BasketServiceImpl implements BasketService {
 
     @Autowired
-    RedisBasketService redisBasketService;
+    private RedisBasketService redisBasketService;
 
     @Autowired
-    DtoToBasketMapper dtoToBasketMapper;
+    private DtoToBasketMapper dtoToBasketMapper;
 
     @Autowired
-    DtoToProductMapper dtoToProductMapper;
+    private DtoToProductMapper dtoToProductMapper;
 
     @Autowired
-    ProductToDtoMapper productToDtoMapper;
+    private ProductToDtoMapper productToDtoMapper;
 
     @Autowired
-    ProductToInputDtoMapper productToInputDtoMapper;
+    private ProductToInputDtoMapper productToInputDtoMapper;
 
 //    @Autowired
 //    BasketToDto basketToDto;
@@ -42,6 +42,7 @@ public class BasketServiceImpl implements BasketService {
 
     /**
      * Метод создания новой корзины
+     *
      * @param basketDto дто корзины
      */
     @Override
@@ -53,6 +54,7 @@ public class BasketServiceImpl implements BasketService {
 
     /**
      * Добавление товара в корзину
+     *
      * @param basketDto дто корзины
      */
     @Override
@@ -64,6 +66,7 @@ public class BasketServiceImpl implements BasketService {
 
     /**
      * Метод удаление конкретного продукта из корзины
+     *
      * @param basketDto дто корзины
      */
     @Override
@@ -75,6 +78,7 @@ public class BasketServiceImpl implements BasketService {
 
     /**
      * Метод получение корзины по номеру телефона
+     *
      * @param phoneNumber номер телефона
      * @return
      */

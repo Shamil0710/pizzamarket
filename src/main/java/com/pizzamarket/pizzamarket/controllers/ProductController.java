@@ -69,6 +69,17 @@ public class ProductController {
     }
 
     /**
+     * EУдаление продукта по id
+     * @param id id продукта
+     */
+    @PutMapping(EndpointConstants.PRODUCT_DELETE)
+    void deleteProduct(@RequestBody Long id) {
+        log.info("Удаление продукта по id " + id.toString() + "\n{}");
+
+        productService.deleteById(id);
+    }
+
+    /**
      * Одновление существующего товара
      * @param inputProductDto входное дто
      */

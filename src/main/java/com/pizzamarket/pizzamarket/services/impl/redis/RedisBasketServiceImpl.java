@@ -28,13 +28,13 @@ public class RedisBasketServiceImpl implements RedisBasketService {
 
 
     @Autowired
-    RedissonClient redissonClient;
+    private RedissonClient redissonClient;
 
     @Autowired
-    ProductService productService;
+    private ProductService productService;
 
     @Autowired
-    DtoToBasketMapper dtoToBasketMapper;
+    private DtoToBasketMapper dtoToBasketMapper;
 
 //    @Autowired
 //    BasketToDto basketToDto;
@@ -47,7 +47,7 @@ public class RedisBasketServiceImpl implements RedisBasketService {
 
     //Метод добавления корзин в редис
     @Override
-    public <T>void setValue(@NotNull String key, T basket) {
+    public <T> void setValue(@NotNull String key, T basket) {
         log.info("Добавлениие орзины по ключу " + key + "\n{}");
 
         final RBucket<Basket> bucket = redissonClient.getBucket(key);
@@ -70,7 +70,7 @@ public class RedisBasketServiceImpl implements RedisBasketService {
 
     //Метод получения корзин из редиса
     @Override
-    public <V>List<V> getList(@NotNull String key) {
+    public <V> List<V> getList(@NotNull String key) {
         log.info("Получение карзины по ключу " + key + "\n{}");
 
         return (List<V>) redissonClient.getList(key).readAll();
@@ -88,8 +88,8 @@ public class RedisBasketServiceImpl implements RedisBasketService {
 
     //Добавление товара в корзину
     @Override
-    public <V>void addToBasket(@NotNull String key, List<Product> product) {
-        log.info("Добавление тоавра " + product.toString() + "в корзину по ключу " + key +"\n{}");
+    public <V> void addToBasket(@NotNull String key, List<Product> product) {
+        log.info("Добавление тоавра " + product.toString() + "в корзину по ключу " + key + "\n{}");
 
 //        final RBucket<Basket> rBucket = redissonClient.getBucket(key);
         final long remainTime = redissonClient.getList(key).remainTimeToLive();
@@ -101,7 +101,7 @@ public class RedisBasketServiceImpl implements RedisBasketService {
         } else {
             redissonClient.getList(key).expire(TTL, TimeUnit.SECONDS);
         }
-   }
+    }
 
 
 }

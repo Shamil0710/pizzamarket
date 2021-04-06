@@ -20,6 +20,8 @@ public final class EndpointConstants {
 
     public static final String PRODUCT_UPGRADE = PRODUCT + "/upgrade";
 
+    public static final String PRODUCT_DELETE = PRODUCT + "/delte";
+
     /** Юсер **/
 
     public static final String USER = ROOT + "/user";

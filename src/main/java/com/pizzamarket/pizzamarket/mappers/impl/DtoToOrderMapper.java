@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class DtoToOrderMapper implements Mapper<InputOrderDto, Order> {
 
     @Autowired
-    DtoToProductMapper dtoToProductMapper;
+    private DtoToProductMapper dtoToProductMapper;
 
     @Override
     public Order convert(InputOrderDto pojo) {

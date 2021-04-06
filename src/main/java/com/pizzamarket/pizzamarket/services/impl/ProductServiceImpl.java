@@ -33,19 +33,20 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     @Autowired
-    DtoToProductMapper dtoToProductMapper;
+    private DtoToProductMapper dtoToProductMapper;
 
     @Autowired
-    ProductToDtoMapper productToDtoMapper;
+    private ProductToDtoMapper productToDtoMapper;
 
     @Autowired
-    CreateProductDtoToProductMapper createProductDtoToProductMapper;
+    private CreateProductDtoToProductMapper createProductDtoToProductMapper;
 
     /**
      * Метод создание нового товара
+     *
      * @param createProductDto дто для создания нового обьекта
      */
     @Override
@@ -62,6 +63,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * Метод удаление товара по id
+     *
      * @param id id товара
      */
     @Override
@@ -75,6 +77,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * Метод обновления информации о товаре
+     *
      * @param inputProductDto входное дто
      */
     @Override
@@ -101,6 +104,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * Получение товара по id
+     *
      * @param id id товара
      * @return
      */
@@ -114,6 +118,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * Получение полного списка товаров
+     *
      * @return
      */
     @Override
@@ -125,7 +130,8 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * Метод получение товаров с разбивкой на страницы
-     * @param page Нормер страницы
+     *
+     * @param page     Нормер страницы
      * @param pageSize Количество элементов на стринце
      * @return
      */
@@ -138,6 +144,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * Метод получения товаров с определенными тегами с разбивкой на страницы
+     *
      * @param productDto входное дто
      */
     @Override

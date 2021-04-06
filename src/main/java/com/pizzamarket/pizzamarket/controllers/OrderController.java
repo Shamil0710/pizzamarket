@@ -20,10 +20,11 @@ import java.util.List;
 public class OrderController {
 
     @Autowired
-    OrderService orderService;
+    private OrderService orderService;
 
     /**
      * Метод создания заказа
+     *
      * @param phoneNumber номер телефона
      */
     @PutMapping(value = EndpointConstants.ORDER_PUT_CREATE)
@@ -35,6 +36,7 @@ public class OrderController {
 
     /**
      * Метод удаления заказа по id
+     *
      * @param id id заказа
      */
     @DeleteMapping(value = EndpointConstants.ORDER_DELETE)
@@ -46,17 +48,19 @@ public class OrderController {
 
     /**
      * Метод получение полного списка заказов
+     *
      * @return
      */
     @GetMapping(value = EndpointConstants.ORDER_GET_ALL)
     List<OutputOrderDto> getAll() {
         log.info("Получение полного списка заказов");
 
-       return orderService.getAll();
+        return orderService.getAll();
     }
 
     /**
      * Получение заказа по номеру телефона
+     *
      * @param phoneNumber номер телефона
      * @return
      */
