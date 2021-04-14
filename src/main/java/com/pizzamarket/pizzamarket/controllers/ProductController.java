@@ -1,10 +1,7 @@
 package com.pizzamarket.pizzamarket.controllers;
 
 import com.pizzamarket.pizzamarket.constants.EndpointConstants;
-import com.pizzamarket.pizzamarket.dto.CreateProductDto;
-import com.pizzamarket.pizzamarket.dto.InputProductDto;
-import com.pizzamarket.pizzamarket.dto.OutputProductDto;
-import com.pizzamarket.pizzamarket.dto.RequestProductDto;
+import com.pizzamarket.pizzamarket.dto.*;
 import com.pizzamarket.pizzamarket.repositorys.OrderRepository;
 import com.pizzamarket.pizzamarket.services.ProductService;
 
@@ -35,7 +32,7 @@ public class ProductController {
 
     /**
      * Метод получения полного перичня товаров
-     * @return
+     * @return Лист с дто для всех товаров
      */
     @GetMapping(EndpointConstants.PRODUCT_GET_ALL)
     public List<OutputProductDto> getAllProduct() {
@@ -47,10 +44,10 @@ public class ProductController {
     /**
      * Получение заданой страницы с указаным количеством итемов
      * @param productDto входной дто
-     * @return
+     * @return Возращает список дто товаров
      */
     @GetMapping(EndpointConstants.PRODUCT_GET_PAGE)
-    List<OutputProductDto> getPage(@PathVariable RequestProductDto productDto) {
+    List<OutputProductDto> getPage(@RequestBody ProductPageDto productDto) {
         log.info("Получение страницы № " + productDto.getPage().toString() + " c "
                 + productDto.getCount().toString() + " товарами" + "\n{}");
 
@@ -90,6 +87,7 @@ public class ProductController {
         productService.updateProduct(inputProductDto);
     }
 
+    //TODO Ошибка валидации
     /**
      * дто запроса продуктов
      * @param productDto дто запроса продуктов
@@ -97,7 +95,7 @@ public class ProductController {
      * @return
      */
     @PostMapping(EndpointConstants.PRODUCT_GET_BY_TAGS)
-    ResponseEntity<List<OutputProductDto>> getFilteredPages(@Valid RequestProductDto productDto, BindingResult bindingResult) {
+    ResponseEntity<List<OutputProductDto>> getFilteredPages(@Valid @RequestBody RequestProductDto productDto, BindingResult bindingResult) {
         log.info("Запрос по тэгам");
         //При наличии оишбок валидации логируем ошибки и отдаем BAD_REQUEST
         if (bindingResult.hasErrors()) {
@@ -115,5 +113,4 @@ public class ProductController {
         orderRepository.findAllByUserPhoneNumber(number);
         return ResponseEntity.ok("succass");
     }
-
 }

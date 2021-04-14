@@ -14,21 +14,21 @@ public final class EndpointConstants {
 
     public static final String PRODUCT_GET_BY_TAGS = PRODUCT + "/getTagged";
 
-    public static final String PRODUCT_GET_PAGE = PRODUCT + "/{page}/{pageSize}";
+    public static final String PRODUCT_GET_PAGE = PRODUCT + "/page";
 
     public static final String PRODUCT_PUT_CREATE = PRODUCT + "/create";
 
     public static final String PRODUCT_UPGRADE = PRODUCT + "/upgrade";
 
-    public static final String PRODUCT_DELETE = PRODUCT + "/delte";
+    public static final String PRODUCT_DELETE = PRODUCT + "/delete";
 
     /** Юсер **/
 
     public static final String USER = ROOT + "/user";
 
-    public static final String USER_GET_BY_USERID = USER + "/{userId}";
+    public static final String USER_GET_BY_USERID = USER + "id/{userId}";
 
-    public static final String USER_GET_BY_PHONENUMBER = USER + "/{phoneNumber}";
+    public static final String USER_GET_BY_PHONENUMBER = USER + "phone/{phoneNumber}";
 
     public static final String USER_GET_ALL = USER + "/all";
 

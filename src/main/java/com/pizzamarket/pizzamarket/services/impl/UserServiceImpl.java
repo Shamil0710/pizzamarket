@@ -63,6 +63,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         final Role userRole = roleRepository.findByName(createUserDto.getRole())
                 .orElseThrow(() -> new IllegalArgumentException("Не найдена роль" + createUserDto.getRole()));
         final User user = new User();
+
         user.setFirstName(createUserDto.getFirstName());
         user.setLastName(createUserDto.getLastName());
         user.setPhoneNumber(createUserDto.getPhoneNumber());

@@ -50,13 +50,13 @@ public class RedisBasketServiceImpl implements RedisBasketService {
     public <T> void setValue(@NotNull String key, T basket) {
         log.info("Добавлениие орзины по ключу " + key + "\n{}");
 
-        final RBucket<Basket> bucket = redissonClient.getBucket(key);
+        final RBucket<T> bucket = redissonClient.getBucket(key);
         final long remainTime = bucket.remainTimeToLive();
 
         if (remainTime > 0) {
-            bucket.set((Basket) basket, remainTime, TimeUnit.MILLISECONDS);
+            bucket.set(basket, remainTime, TimeUnit.MILLISECONDS);
         } else {
-            bucket.set((Basket) basket, remainTime, TimeUnit.SECONDS);
+            bucket.set(basket, TTL, TimeUnit.MILLISECONDS);
         }
     }
 

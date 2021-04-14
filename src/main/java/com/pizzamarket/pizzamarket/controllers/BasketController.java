@@ -49,7 +49,7 @@ public class BasketController {
     /**
      * Метод удаления товара из корзины
      *
-     * @param basketDto
+     * @param basketDto Дто корзины
      */
     @DeleteMapping(value = EndpointConstants.BASKET_DELETE_PRODUCT_IN_BASKET)
     void deleteProductInBasket(@RequestBody BasketDto basketDto, @RequestBody InputProductDto inputProductDto) {
@@ -62,7 +62,7 @@ public class BasketController {
      * Метод получение корзины по номеру телефона
      *
      * @param phoneNumber номер телефона
-     * @return
+     * @return Дто корзины
      */
     @GetMapping(value = EndpointConstants.BASKET_GET_BASKET)
     BasketDto getBasket(@RequestBody String phoneNumber) {

@@ -18,6 +18,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Бин ответсвенный за шифрование
+     *
      * @return
      */
     @Bean
@@ -27,8 +28,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-        httpSecurity.csrf().and().cors().disable()
-                .authorizeRequests().antMatchers("/**").permitAll();
+//        httpSecurity.csrf().and().cors().disable()
+//                .authorizeRequests().antMatchers("/").permitAll();
+
+        httpSecurity.csrf().disable().authorizeRequests().anyRequest().permitAll();
 
 //        httpSecurity.csrf().and().cors()
 //                .disable()

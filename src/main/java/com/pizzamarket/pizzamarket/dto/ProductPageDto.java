@@ -4,17 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /**
- * Класс запроса продуктов с пагинацией и фильтрацией по тегу
+ * Класс запроса продуктов с пагинацией
  */
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RequestProductDto {
+public class ProductPageDto {
+
 
     /**
      * номер страницы
@@ -27,9 +26,4 @@ public class RequestProductDto {
      */
     @NotNull
     private Integer count;
-
-    /**
-     * тэги для которых запрашиваются продукты
-     */
-    private List<String> tags;
 }

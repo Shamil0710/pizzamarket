@@ -28,7 +28,7 @@ public class OrderController {
      * @param phoneNumber номер телефона
      */
     @PutMapping(value = EndpointConstants.ORDER_PUT_CREATE)
-    void createOrder(@RequestBody String phoneNumber) {
+    void createOrder(@RequestParam String phoneNumber) {
         log.info("Создание корзины по номеру " + phoneNumber + "\n{}");
 
         orderService.createOrder(phoneNumber);
