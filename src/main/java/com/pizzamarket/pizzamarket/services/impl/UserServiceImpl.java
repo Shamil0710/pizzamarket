@@ -69,7 +69,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setPhoneNumber(createUserDto.getPhoneNumber());
         user.setPassword(bCryptPasswordEncoder.encode(createUserDto.getPassword()));
         user.getRoles().add(userRole);
+        userRole.getUser().add(user);
+
         userRepository.save(user);
+        roleRepository.save(userRole);
+
+
     }
 
     /**

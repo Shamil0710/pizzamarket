@@ -18,13 +18,6 @@ create table if not exists mampiza.user(
     phone_number      VARCHAR(8) unique,
     user_roles        BIGINT references mampiza.roles(roles_id) on delete cascade
 );
-create table if not exists mampiza.roles_users(
-    user_id           BIGINT NOT NULL references mampiza.user (user_id) on delete cascade,
-    role_id           BIGINT NOT NULL references mampiza.roles (roles_id) on delete cascade,
-    Primary Key (user_id, role_id)
---                                            TODO Как свапнуть диалект? влияет это на что то или только на подсветку синтаксиса?
---                                            TODO Мб сделать это отдельным файлом и добавить в ченж лог?
-);
 create table if not exists mampiza.product(
     product_id        BIGSERIAL primary key,
     cost              NUMERIC(17, 2) NOT NULL,

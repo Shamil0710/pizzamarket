@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -37,11 +38,8 @@ public class Role implements GrantedAuthority {
     /**
      * Набор пользователей с данной ролью
      */
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "roles_users",
-            joinColumns = { @JoinColumn(name = "roles_id") },
-            inverseJoinColumns = { @JoinColumn(name = "user_id") })
-    private Set<User> user;
+    @ManyToMany(cascade = CascadeType.MERGE, mappedBy = "roles")
+    private Set<User> user = new HashSet<>();
 
     /**
      * Реализация GrantedAuthority

@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -65,9 +66,11 @@ public class User implements UserDetails, Serializable {
     /**
      * Список ролей
      */
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Column(name = "user_roles", nullable = false)
-    private Set<Role> roles;
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "roles_users",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "role_id") })
+    private Set<Role> roles = new HashSet<>();
 
 
     //Имплементация интерфейса UserDetails необходимого для работы СпрингСикъюра
