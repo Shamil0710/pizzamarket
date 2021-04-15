@@ -28,7 +28,12 @@ create table if not exists mampiza.product(
 create table if not exists mampiza.order(
     order_id          BIGSERIAL primary key,
     user_id           BIGINT NOT NULL references mampiza.user (user_id) on delete cascade,
-    product_id        BIGINT NOT NULL references mampiza.product (product_id) on delete cascade,
+    products          BIGINT NOT NULL references mampiza.product (product_id) on delete cascade,
     time_of_ordering  DATE,
     cost              NUMERIC (17, 2) NOT NULL
+);
+create table if not exists mampiza.order_product(
+    order_id          BIGINT NOT NULL references mampiza.order (order_id) on delete cascade,
+    product_id        BIGINT NOT NULL references mampiza.product (product_id) on delete cascade,
+    PRIMARY KEY (order_id, product_id)
 );

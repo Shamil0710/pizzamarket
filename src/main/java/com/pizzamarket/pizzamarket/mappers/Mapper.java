@@ -1,4 +1,4 @@
-package com.pizzamarket.pizzamarket.services.mappers;
+package com.pizzamarket.pizzamarket.mappers;
 
 import java.util.List;
 import java.util.stream.Collectors;

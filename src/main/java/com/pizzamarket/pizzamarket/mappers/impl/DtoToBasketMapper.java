@@ -2,11 +2,12 @@ package com.pizzamarket.pizzamarket.mappers.impl;
 
 import com.pizzamarket.pizzamarket.dto.BasketDto;
 import com.pizzamarket.pizzamarket.entities.redis.Basket;
+import com.pizzamarket.pizzamarket.mappers.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DtoToBasketMapper implements com.pizzamarket.pizzamarket.services.mappers.Mapper<BasketDto, Basket> {
+public class DtoToBasketMapper implements Mapper<BasketDto, Basket> {
 
     @Autowired
     private DtoToProductMapper dtoToProductMapper;

@@ -2,7 +2,7 @@ package com.pizzamarket.pizzamarket.mappers.impl;
 
 import com.pizzamarket.pizzamarket.dto.InputProductDto;
 import com.pizzamarket.pizzamarket.entities.Product;
-import com.pizzamarket.pizzamarket.services.mappers.Mapper;
+import com.pizzamarket.pizzamarket.mappers.Mapper;
 import org.springframework.stereotype.Component;
 
 /**

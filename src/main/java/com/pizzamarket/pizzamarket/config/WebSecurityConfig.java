@@ -1,7 +1,6 @@
 package com.pizzamarket.pizzamarket.config;
 
 
-import com.pizzamarket.pizzamarket.constants.EndpointConstants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -28,9 +27,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-//        httpSecurity.csrf().and().cors().disable()
-//                .authorizeRequests().antMatchers("/").permitAll();
-
         httpSecurity.csrf().disable().authorizeRequests().anyRequest().permitAll();
 
 //        httpSecurity.csrf().and().cors()
@@ -50,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                        EndpointConstants.PRODUCT_GET_ALL, EndpointConstants.PRODUCT_GET_BY_TAGS,
 //                        EndpointConstants.PRODUCT_GET_PAGE).hasRole("USER")
 //                //Все остальные страницы требуют аутентификации
-//                .anyRequest().authenticated() //TODO Проверить
+//                .anyRequest().authenticated()
 //                .and()
 //                //Настройка для входа в систему
 //                .formLogin().disable()
@@ -59,11 +55,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .permitAll()
 //                .logoutSuccessUrl("/");
     }
-
-//TODO Настройка для моего проекта
-
-//    @Autowired
-//    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
 }
 
