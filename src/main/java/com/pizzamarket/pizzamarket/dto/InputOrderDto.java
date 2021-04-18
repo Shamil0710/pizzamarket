@@ -1,6 +1,6 @@
 package com.pizzamarket.pizzamarket.dto;
 
-import com.pizzamarket.pizzamarket.entities.Product;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

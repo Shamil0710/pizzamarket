@@ -30,7 +30,7 @@ create table if not exists mampiza.product(
 );
 create table if not exists mampiza.order(
     order_id          BIGSERIAL primary key,
-    user_id           BIGINT NOT NULL references mampiza.user (user_id) on delete cascade,
+    user_id           BIGINT NOT NULL references mampiza.user (user_id),
     time_of_ordering  DATE,
     cost              NUMERIC (17, 2) NOT NULL
 );

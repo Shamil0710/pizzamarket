@@ -1,6 +1,5 @@
 package com.pizzamarket.pizzamarket.services.impl.redis;
 
-import com.pizzamarket.pizzamarket.entities.Product;
 import com.pizzamarket.pizzamarket.entities.redis.Basket;
 import com.pizzamarket.pizzamarket.mappers.impl.DtoToBasketMapper;
 import com.pizzamarket.pizzamarket.mappers.impl.DtoToProductMapper;
@@ -91,16 +90,7 @@ public class RedisBasketServiceImpl implements RedisBasketService {
     public <V> void getListAndDeleteValue(@NotNull String key, V product) {
         log.info("Удаление из корзины по ключу " + key + " товара " + product.toString() + "\n{}");
 
-        //TODO исправить, не работает
-
-        List<V> productList = (List<V>) redissonClient.getList(key).readAll();
-
-        redissonClient.getList(key).delete();
-
-        productList.remove(product);
-
-        redissonClient.getList(key).addAll(productList);
-
+        redissonClient.getList(key).remove(product);
     }
 
     //Получение и удаление по ключу

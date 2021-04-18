@@ -6,6 +6,9 @@ import com.pizzamarket.pizzamarket.mappers.Mapper;
 import org.springframework.stereotype.Component;
 
 
+/**
+ * Преобразование из сущности в дто продукта
+ */
 @Component
 public class ProductToInputDtoMapper implements Mapper<Product, InputProductDto> {
     @Override

@@ -10,7 +10,6 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.List;
 
-//todo: комменты, жавадок, @Table и тд
 
 /**
  * Сущность карзины для редиса

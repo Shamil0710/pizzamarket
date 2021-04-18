@@ -34,14 +34,14 @@ public class Order {
     */
    @NotNull
    //Много заказов один юсер
-   @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "user_id")
    private User user;
 
    /**
     * Список продуктов в заказе
     */
-   @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
+   @OneToMany
    @JoinTable(name = "order_product",
    joinColumns = {@JoinColumn(name = "order_id")},
    inverseJoinColumns = {@JoinColumn(name = "product_id")})
