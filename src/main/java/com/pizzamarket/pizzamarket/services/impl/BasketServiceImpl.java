@@ -84,7 +84,6 @@ public class BasketServiceImpl implements BasketService {
      */
     @Override
     public BasketDto getBasket(String phoneNumber) {
-        //TODO Костыль с дто, я заебался, пусть пока так
         BasketDto basketDto = new BasketDto(productToInputDtoMapper.convertAll(redisBasketService.getList(phoneNumber)), phoneNumber);
 
         return basketDto;

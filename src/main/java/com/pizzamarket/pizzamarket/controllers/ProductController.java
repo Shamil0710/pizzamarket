@@ -82,13 +82,12 @@ public class ProductController {
      * @param inputProductDto входное дто
      */
     @PutMapping(EndpointConstants.PRODUCT_UPGRADE)
-    void upgradeProduct(@RequestBody InputProductDto inputProductDto) { //TODO изменить дто
+    void upgradeProduct(@RequestBody InputProductDto inputProductDto) {
         log.info("Обновление информации о продукцте " + inputProductDto.toString() + "\n{}");
 
         productService.updateProduct(inputProductDto);
     }
 
-    //TODO Ошибка валидации
     /**
      * дто запроса продуктов
      * @param productDto дто запроса продуктов
@@ -105,13 +104,5 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.ok(productService.getByTag(productDto));
-    }
-
-    //TODO тестовый метод
-    @GetMapping("/test/{number}")
-    public ResponseEntity<String> test(@PathVariable String number){
-        orderRepository.findAllByUser_PhoneNumber(number);
-        orderRepository.findAllByUserPhoneNumber(number);
-        return ResponseEntity.ok("succass");
     }
 }

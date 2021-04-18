@@ -27,7 +27,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 
-//todo: разбирайся с секьюром
 @Slf4j
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -161,10 +160,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userToDtoMapper.convertAll(userRepository.findAll());
     }
 
-    //TODO говно для сикюра
+
     //В моем случаи уникальным юсер неймом будет номер телефона
     @Override
-    public UserDetails loadUserByUsername(String phoneNumber) throws UsernameNotFoundException { //TODO нахуя? апд Разобратся с сраным сикьюром
+    public UserDetails loadUserByUsername(String phoneNumber) throws UsernameNotFoundException {
 
         return userRepository.findByPhoneNumber(phoneNumber).orElseThrow(() -> new UsernameNotFoundException(
                 String.format("Пользователь с номером телефона %s не найден", phoneNumber)));

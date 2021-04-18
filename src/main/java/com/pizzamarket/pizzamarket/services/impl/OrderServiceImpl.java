@@ -81,13 +81,6 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.deleteById(id);
     }
 
-//    @Override
-//    public void addProductToOder(InputOrderDto inputOrderDto) {
-//        orderRepository.findById(inputOrderDto.getId()).orElseThrow(() -> new IllegalArgumentException("Некоректное значение стоимости"))
-//                .getProducts().addAll(inputOrderDto.getProducts());
-//        //TODO пересчитать стоимость заказа стримом
-//    }
-
     /**
      * Получение полного списка заказов
      *

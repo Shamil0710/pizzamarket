@@ -74,8 +74,6 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteById(id);
     }
 
-    //todo: для кастомных ошибок, и не только, но и в целом, нужно описать RestControllerAdvice
-
     /**
      * Метод обновления информации о товаре
      *

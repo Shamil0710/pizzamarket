@@ -55,7 +55,7 @@ public class BasketController {
     @PutMapping(value = EndpointConstants.BASKET_DELETE_PRODUCT_IN_BASKET)
     void deleteProductInBasket(@RequestParam String phoneNumber, @RequestBody InputProductDto inputProductDto) {
         log.info("Удаление продукта из корзины с номером " + phoneNumber + "\n{}");
-//TODO Довести до ума
+
         basketService.deleteProductInBasket(phoneNumber, inputProductDto);
     }
 

@@ -12,7 +12,5 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-   List<Order> findAllByUser_PhoneNumber(String phoneNumber); //TODO разобратся с запросом
-
    List<Order> findAllByUserPhoneNumber(String phoneNumber);
 }
