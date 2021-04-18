@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Репозиторий для работы с ролями
+ */
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
 

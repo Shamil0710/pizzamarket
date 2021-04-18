@@ -49,7 +49,7 @@ public class BasketServiceImpl implements BasketService {
     public void createBasket(BasketDto basketDto) {
         log.info("Создание коризны по номеру " + basketDto.getPhoneNumber() + "С товарами" + basketDto.getProducts().toString() + "\n{}");
 
-        redisBasketService.setValue(basketDto.getPhoneNumber(), dtoToBasketMapper.convert(basketDto));
+        redisBasketService.addToBasket(basketDto.getPhoneNumber(), dtoToProductMapper.convertAll(basketDto.getProducts()));
     }
 
     /**
@@ -66,14 +66,14 @@ public class BasketServiceImpl implements BasketService {
 
     /**
      * Метод удаление конкретного продукта из корзины
-     *
-     * @param basketDto дто корзины
+     * @param phoneNumber номер телефона
+     * @param inputProductDto Входное дто продукта
      */
     @Override
-    public void deleteProductInBasket(BasketDto basketDto, InputProductDto inputProductDto) {
-        log.info("Удаление из карзины по номеру " + basketDto.getPhoneNumber() + "товара " + dtoToProductMapper.convert(inputProductDto).toString() + "\n{}");
+    public void deleteProductInBasket(String phoneNumber, InputProductDto inputProductDto) {
+        log.info("Удаление из карзины по номеру " + phoneNumber + "товара " + dtoToProductMapper.convert(inputProductDto).toString() + "\n{}");
 
-        redisBasketService.getBasket(basketDto.getPhoneNumber()).getProducts().remove(dtoToProductMapper.convert(inputProductDto));
+        redisBasketService.getListAndDeleteValue(phoneNumber, dtoToProductMapper.convert(inputProductDto));
     }
 
     /**
@@ -85,7 +85,7 @@ public class BasketServiceImpl implements BasketService {
     @Override
     public BasketDto getBasket(String phoneNumber) {
         //TODO Костыль с дто, я заебался, пусть пока так
-        BasketDto basketDto = new BasketDto(productToInputDtoMapper.convertAll(redisBasketService.getBasket(phoneNumber).getProducts()), phoneNumber);
+        BasketDto basketDto = new BasketDto(productToInputDtoMapper.convertAll(redisBasketService.getList(phoneNumber)), phoneNumber);
 
         return basketDto;
     }

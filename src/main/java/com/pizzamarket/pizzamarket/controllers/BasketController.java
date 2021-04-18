@@ -49,13 +49,14 @@ public class BasketController {
     /**
      * Метод удаления товара из корзины
      *
-     * @param basketDto Дто корзины
+     * @param phoneNumber Номер телефона
+     * @param inputProductDto Товар для удаления
      */
-    @DeleteMapping(value = EndpointConstants.BASKET_DELETE_PRODUCT_IN_BASKET)
-    void deleteProductInBasket(@RequestBody BasketDto basketDto, @RequestBody InputProductDto inputProductDto) {
-        log.info("Удаление продукта из корзины с номером " + basketDto.getPhoneNumber() + "\n{}");
-
-        basketService.deleteProductInBasket(basketDto, inputProductDto);
+    @PutMapping(value = EndpointConstants.BASKET_DELETE_PRODUCT_IN_BASKET)
+    void deleteProductInBasket(@RequestParam String phoneNumber, @RequestBody InputProductDto inputProductDto) {
+        log.info("Удаление продукта из корзины с номером " + phoneNumber + "\n{}");
+//TODO Довести до ума
+        basketService.deleteProductInBasket(phoneNumber, inputProductDto);
     }
 
     /**
@@ -65,7 +66,7 @@ public class BasketController {
      * @return Дто корзины
      */
     @GetMapping(value = EndpointConstants.BASKET_GET_BASKET)
-    BasketDto getBasket(@RequestBody String phoneNumber) {
+    BasketDto getBasket(@RequestParam String phoneNumber) {
         log.info("Получение корзины по номеру " + phoneNumber + "\n{}");
 
         return basketService.getBasket(phoneNumber);

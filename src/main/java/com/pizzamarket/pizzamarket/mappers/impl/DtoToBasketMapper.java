@@ -6,6 +6,9 @@ import com.pizzamarket.pizzamarket.mappers.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * Маппер преобразующий дто корзины в корзину
+ */
 @Component
 public class DtoToBasketMapper implements Mapper<BasketDto, Basket> {
 

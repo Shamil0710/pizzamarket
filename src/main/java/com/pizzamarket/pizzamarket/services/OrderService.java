@@ -13,8 +13,6 @@ public interface OrderService {
 
     void deleteById (Long id);
 
-//    void addProductToOder (InputOrderDto inputOrderDto);
-
     List<OutputOrderDto> getAll ();
 
     List<OutputOrderDto> findByPhoneNumber (String phoneNumber);

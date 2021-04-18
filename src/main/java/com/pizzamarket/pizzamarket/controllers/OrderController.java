@@ -39,8 +39,8 @@ public class OrderController {
      *
      * @param id id заказа
      */
-    @DeleteMapping(value = EndpointConstants.ORDER_DELETE)
-    void deleteById(@PathVariable Long id) {
+    @PutMapping(value = EndpointConstants.ORDER_DELETE)
+    void deleteById(@RequestParam Long id) {
         log.info("Удаление товара по id " + id.toString() + "\n{}");
 
         orderService.deleteById(id);
@@ -65,7 +65,7 @@ public class OrderController {
      * @return
      */
     @GetMapping(value = EndpointConstants.ORDER_GET_BY_PHONENUMBER)
-    List<OutputOrderDto> getByPhoneNumber(@PathVariable String phoneNumber) {
+    List<OutputOrderDto> getByPhoneNumber(@RequestParam String phoneNumber) {
         log.info("Получение заказа по номеру " + phoneNumber + "\n{}");
 
         return orderService.findByPhoneNumber(phoneNumber);

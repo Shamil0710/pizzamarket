@@ -57,12 +57,12 @@ public class OrderServiceImpl implements OrderService {
 
         Order order = new Order();
 
-        order.setProducts(redisBasketService.getBasket(phoneNumber).getProducts());
+        order.setProducts(redisBasketService.getList(phoneNumber));
         order.setUser(userRepository.findByPhoneNumber(phoneNumber).orElseThrow(() -> new UserNotFoundException(
                 String.format("Пользователь с номером телефонв %s не найден", phoneNumber))));
         order.setTimeOfOrdering(Instant.now());
-        order.setCost(redisBasketService.getBasket(phoneNumber).getProducts()
-                .stream().map(Product::getCost)
+        order.setCost(redisBasketService.getAndDeleteList(phoneNumber)
+                .stream().map(e -> ((Product) e).getCost())
                 .reduce(BigDecimal::add)
                 .orElseThrow(() -> new IllegalArgumentException("Некоректное значение стоимости")));
 
@@ -108,8 +108,8 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public List<OutputOrderDto> findByPhoneNumber(String phoneNumber) {
-        log.info("Получение списка заказов по номнру телефона " + phoneNumber.toString() + "\n{}");
+        log.info("Получение списка заказов по номнру телефона " + phoneNumber + "\n{}");
 
-        return orderToDtoMapper.convertAll(orderRepository.findAllByUser_PhoneNumber(phoneNumber));
+        return orderToDtoMapper.convertAll(orderRepository.findAllByUserPhoneNumber(phoneNumber));
     }
 }

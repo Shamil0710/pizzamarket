@@ -70,4 +70,11 @@ public class UsersController {
         userService.saveUser(inputUserDto);
     }
 
+    @PutMapping(EndpointConstants.USER_DELETE)
+    public void deleteUser(@PathVariable String phoneNumber) {
+        log.info("Удаление пользователя по номеру телефона " + phoneNumber + "\n{}");
+
+        userService.deleteByPhoneNumber(phoneNumber);
+    }
+
 }

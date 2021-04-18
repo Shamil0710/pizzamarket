@@ -34,6 +34,8 @@ public final class EndpointConstants {
 
     public static final String USER_PUT_CREATE = USER + "/create";
 
+    public static final String USER_DELETE = USER + "/delete/{phoneNumber}";
+
     /** Заказ **/
 
     public static final String ORDER = ROOT + "/order";

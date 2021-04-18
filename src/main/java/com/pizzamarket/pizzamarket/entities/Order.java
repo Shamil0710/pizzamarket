@@ -33,8 +33,6 @@ public class Order {
     * Пользователь которому пренадлежит заказ
     */
    @NotNull
-   //    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-   //    @JoinColumn(name = "shop_log_id")
    //Много заказов один юсер
    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
    @JoinColumn(name = "user_id")
@@ -43,8 +41,7 @@ public class Order {
    /**
     * Список продуктов в заказе
     */
-   @OneToMany(cascade = CascadeType.MERGE) //TODO создать таблицу @OneToMany по аналогии с ролями в юсере
-//   @JoinColumn(name = "product_id", referencedColumnName = "order_id")
+   @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
    @JoinTable(name = "order_product",
    joinColumns = {@JoinColumn(name = "order_id")},
    inverseJoinColumns = {@JoinColumn(name = "product_id")})

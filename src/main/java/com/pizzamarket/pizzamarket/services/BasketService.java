@@ -10,7 +10,7 @@ public interface BasketService {
 
     void addProductToBasket(BasketDto basketDto);
 
-    void deleteProductInBasket(BasketDto basketDto, InputProductDto inputProductDto);
+    void deleteProductInBasket(String phoneNumber, InputProductDto inputProductDto);
 
     BasketDto getBasket(String phoneNumber);
 
