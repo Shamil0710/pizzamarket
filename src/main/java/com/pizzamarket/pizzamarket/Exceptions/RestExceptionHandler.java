@@ -13,15 +13,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
-//    @Data
-//    @AllArgsConstructor
-//    private static class Exception {
-//        private String message;
-//    }
-
     @ExceptionHandler(ProductNotFoundException.class)
     ResponseEntity<String> handleProductNotFoundException(ProductNotFoundException exception) {
-        return new ResponseEntity<>(exception.getMessage(),HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(UserNotFoundException.class)

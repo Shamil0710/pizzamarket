@@ -48,8 +48,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     /**
      * Метод добавления нового пользователя
+     *
      * @param createUserDto входящее дто
-     * @return
      */
     @Override
     public void saveUser(CreateUserDto createUserDto) {
@@ -72,12 +72,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
         userRepository.save(user);
         roleRepository.save(userRole);
-
-
     }
 
     /**
      * Удаление пользователя по id
+     *
      * @param id id ользователя
      */
     @Override
@@ -88,18 +87,20 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     /**
      * Удаление пользователя по номеру ьелефона
+     *
      * @param phoneNumber Номер телефона
      */
     @Override
     public void deleteByPhoneNumber(String phoneNumber) {
-        log.info("Удаление пользователя по номеру телеофа" + phoneNumber.toString() + "\n{}");
-       userRepository.deleteById(userRepository.findByPhoneNumber(phoneNumber)
+        log.info("Удаление пользователя по номеру телеофа" + phoneNumber + "\n{}");
+        userRepository.deleteById(userRepository.findByPhoneNumber(phoneNumber)
                 .orElseThrow(() -> new UserNotFoundException(
                         String.format("Пользователь с номером телефона %s", phoneNumber))).getId());
     }
 
     /**
      * бновление пользователя согласно входящему дто
+     *
      * @param inputUserDto входное дто
      */
     @Override
@@ -111,27 +112,28 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             throw new MappingException("inputUserDto");
         }
 
-       final User user = userRepository.findById(inputUserDto.getId()).orElseThrow(() -> new UserNotFoundException(
+        final User user = userRepository.findById(inputUserDto.getId()).orElseThrow(() -> new UserNotFoundException(
                 String.format("Пользователь с id= %s не найден", inputUserDto.getId())));
 
         userRepository.deleteById(inputUserDto.getId());
 
-            user.setPhoneNumber(inputUserDto.getPhoneNumber());
-            user.setFirstName(inputUserDto.getFirstName());
-            user.setLastName(inputUserDto.getLastName());
-            user.setPassword(inputUserDto.getPassword());
+        user.setPhoneNumber(inputUserDto.getPhoneNumber());
+        user.setFirstName(inputUserDto.getFirstName());
+        user.setLastName(inputUserDto.getLastName());
+        user.setPassword(inputUserDto.getPassword());
 
         userRepository.save(user);
     }
 
     /**
      * Получение пользователя по id
+     *
      * @param id id пользователя
-     * @return
+     * @return дто пользователя
      */
     @Override
     public OutputUserDto findById(Long id) {
-        log.info("Получение пользователя по ID {}" + id + "\n{}");
+        log.info("Получение пользователя по ID {}" + id.toString() + "\n{}");
 
         return userToDtoMapper.convert(userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(
                 String.format("Пользователь с id= %s не найден", id))));
@@ -139,8 +141,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     /**
      * Получение пользователя по номеру телефона
+     *
      * @param phoneNumber номер телефона
-     * @return
+     * @return дто пользователя
      */
     @Override
     public OutputUserDto findByPhoneNumber(String phoneNumber) {
@@ -152,7 +155,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     /**
      * Метод получени полного списка пользователей
-     * @return
+     *
+     * @return лист дто пользователя
      */
     public List<OutputUserDto> findAll() {
         log.info("Получение полного списка пользователей");

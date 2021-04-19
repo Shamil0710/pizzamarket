@@ -44,6 +44,7 @@ public class Role implements GrantedAuthority {
 
     /**
      * Реализация GrantedAuthority
+     *
      * @return
      */
     @Override

@@ -24,17 +24,19 @@ public class UsersController {
 
     /**
      * ПОлучение полного списка пользователей
+     *
      * @return
      */
     @GetMapping(EndpointConstants.USER_GET_ALL)
     public List<OutputUserDto> allUsers() {
         log.info("Получение полного списка пользователей");
 
-       return userService.findAll();
+        return userService.findAll();
     }
 
     /**
      * Получение пользователя по id
+     *
      * @param userId id пользователя
      * @return
      */
@@ -48,6 +50,7 @@ public class UsersController {
 
     /**
      * Получение пользователя по номеру телефона
+     *
      * @param phoneNumber номер телефона
      * @return
      */
@@ -61,6 +64,7 @@ public class UsersController {
 
     /**
      * Добавление нового пользователя
+     *
      * @param inputUserDto Входное дто с информацией о пользователе
      */
     @PutMapping(EndpointConstants.USER_PUT_CREATE)
@@ -76,5 +80,4 @@ public class UsersController {
 
         userService.deleteByPhoneNumber(phoneNumber);
     }
-
 }

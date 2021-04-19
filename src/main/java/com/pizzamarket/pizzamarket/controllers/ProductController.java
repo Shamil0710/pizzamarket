@@ -33,6 +33,7 @@ public class ProductController {
 
     /**
      * Метод получения полного перичня товаров
+     *
      * @return Лист с дто для всех товаров
      */
     @GetMapping(EndpointConstants.PRODUCT_GET_ALL)
@@ -44,6 +45,7 @@ public class ProductController {
 
     /**
      * Получение заданой страницы с указаным количеством итемов
+     *
      * @param productDto входной дто
      * @return Возращает список дто товаров
      */
@@ -57,6 +59,7 @@ public class ProductController {
 
     /**
      * Добавление нового продукта
+     *
      * @param createProductDto входное дто
      */
     @PutMapping(EndpointConstants.PRODUCT_PUT_CREATE)
@@ -68,6 +71,7 @@ public class ProductController {
 
     /**
      * EУдаление продукта по id
+     *
      * @param id id продукта
      */
     @PutMapping(EndpointConstants.PRODUCT_DELETE)
@@ -79,6 +83,7 @@ public class ProductController {
 
     /**
      * Одновление существующего товара
+     *
      * @param inputProductDto входное дто
      */
     @PutMapping(EndpointConstants.PRODUCT_UPGRADE)
@@ -90,7 +95,8 @@ public class ProductController {
 
     /**
      * дто запроса продуктов
-     * @param productDto дто запроса продуктов
+     *
+     * @param productDto    дто запроса продуктов
      * @param bindingResult возращает ошибки валидации
      * @return
      */

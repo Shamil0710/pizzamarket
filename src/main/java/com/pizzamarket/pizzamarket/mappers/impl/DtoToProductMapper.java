@@ -21,6 +21,6 @@ public class DtoToProductMapper implements Mapper<InputProductDto, Product> {
         product.setTag(pojo.getTag());
         product.setTitle(pojo.getTitle());
 
-        return  product;
+        return product;
     }
 }

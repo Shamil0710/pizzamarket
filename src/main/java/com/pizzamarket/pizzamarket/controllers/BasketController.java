@@ -49,7 +49,7 @@ public class BasketController {
     /**
      * Метод удаления товара из корзины
      *
-     * @param phoneNumber Номер телефона
+     * @param phoneNumber     Номер телефона
      * @param inputProductDto Товар для удаления
      */
     @PutMapping(value = EndpointConstants.BASKET_DELETE_PRODUCT_IN_BASKET)

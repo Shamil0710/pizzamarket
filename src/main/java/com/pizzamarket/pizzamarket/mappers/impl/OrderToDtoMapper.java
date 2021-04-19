@@ -22,6 +22,6 @@ public class OrderToDtoMapper implements Mapper<Order, OutputOrderDto> {
 
     @Override
     public OutputOrderDto convert(Order pojo) {
-       return new OutputOrderDto(pojo.getId(), userToDtoMapper.convert(pojo.getUser()), productToInputDtoMapper.convertAll(pojo.getProducts()), pojo.getTimeOfOrdering(), pojo.getCost());
+        return new OutputOrderDto(pojo.getId(), userToDtoMapper.convert(pojo.getUser()), productToInputDtoMapper.convertAll(pojo.getProducts()), pojo.getTimeOfOrdering(), pojo.getCost());
     }
 }

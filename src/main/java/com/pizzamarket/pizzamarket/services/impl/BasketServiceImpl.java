@@ -36,9 +36,6 @@ public class BasketServiceImpl implements BasketService {
     @Autowired
     private ProductToInputDtoMapper productToInputDtoMapper;
 
-//    @Autowired
-//    BasketToDto basketToDto;
-
 
     /**
      * Метод создания новой корзины
@@ -66,7 +63,8 @@ public class BasketServiceImpl implements BasketService {
 
     /**
      * Метод удаление конкретного продукта из корзины
-     * @param phoneNumber номер телефона
+     *
+     * @param phoneNumber     номер телефона
      * @param inputProductDto Входное дто продукта
      */
     @Override
@@ -80,7 +78,7 @@ public class BasketServiceImpl implements BasketService {
      * Метод получение корзины по номеру телефона
      *
      * @param phoneNumber номер телефона
-     * @return
+     * @return Дто корзины
      */
     @Override
     public BasketDto getBasket(String phoneNumber) {

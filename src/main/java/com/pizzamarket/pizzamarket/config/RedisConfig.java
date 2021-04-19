@@ -34,10 +34,11 @@ public class RedisConfig {
 
     /**
      * Предоставляет клиент редиса
-     * @return
+     *
+     * @return Соединение с редисом
      */
     @Bean
-    public RedisConnectionFactory redissonConnectionFactory(){
+    public RedisConnectionFactory redissonConnectionFactory() {
         return new RedissonConnectionFactory(redissonClient());
     }
 

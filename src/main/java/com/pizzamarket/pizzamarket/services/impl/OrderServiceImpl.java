@@ -49,7 +49,7 @@ public class OrderServiceImpl implements OrderService {
     /**
      * Метод создания нового заказа
      *
-     * @param phoneNumber
+     * @param phoneNumber номер телефона
      */
     @Override
     public void createOrder(String phoneNumber) {
@@ -72,7 +72,7 @@ public class OrderServiceImpl implements OrderService {
     /**
      * Удаление заказа по id
      *
-     * @param id
+     * @param id id заказа
      */
     @Override
     public void deleteById(Long id) {
@@ -84,7 +84,7 @@ public class OrderServiceImpl implements OrderService {
     /**
      * Получение полного списка заказов
      *
-     * @return
+     * @return Лист дто заказов
      */
     @Override
     public List<OutputOrderDto> getAll() {
@@ -96,8 +96,8 @@ public class OrderServiceImpl implements OrderService {
     /**
      * Получение заказов по нормеру телефона
      *
-     * @param phoneNumber
-     * @return
+     * @param phoneNumber номер телефона
+     * @return лист дто заказов
      */
     @Override
     public List<OutputOrderDto> findByPhoneNumber(String phoneNumber) {

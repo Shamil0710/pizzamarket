@@ -68,12 +68,14 @@ public class User implements UserDetails, Serializable {
      */
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "roles_users",
-            joinColumns = { @JoinColumn(name = "user_id") },
-            inverseJoinColumns = { @JoinColumn(name = "role_id") })
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles = new HashSet<>();
 
 
-    //Имплементация интерфейса UserDetails необходимого для работы СпрингСикъюра
+    /**
+     * Часть необходимая для полноценной ркализации spring security
+     **/
     @Transient
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -120,7 +120,7 @@ public class RedisBasketServiceImpl implements RedisBasketService {
 
         final long remainTime = redissonClient.getList(key).remainTimeToLive();
 
-            redissonClient.getList(key).addAll(product);
+        redissonClient.getList(key).addAll(product);
 
         if (remainTime > 0) {
             redissonClient.getList(key).expire(remainTime, TimeUnit.MILLISECONDS);
@@ -128,6 +128,4 @@ public class RedisBasketServiceImpl implements RedisBasketService {
             redissonClient.getList(key).expire(TTL, TimeUnit.MILLISECONDS);
         }
     }
-
-
 }

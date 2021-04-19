@@ -12,46 +12,52 @@ public interface UserService {
 
     /**
      * Метод добавление пользователя в базу
-     * @param createUserDto
-     * @return
+     *
+     * @param createUserDto дто создания пользователя
      */
     void saveUser(CreateUserDto createUserDto);
 
     /**
      * Метод удаления пользователя из базы
-     * @param id
+     *
+     * @param id id пользователя
      */
     void deleteById(Long id);
 
     /**
      * Удаление пользователя из базы
-     * @param phoneNumber
+     *
+     * @param phoneNumber номер телефона
      */
     void deleteByPhoneNumber(String phoneNumber);
 
     /**
      * Обновление даных у пользователе
-     * @param inputUserDto
+     *
+     * @param inputUserDto дто пользователя
      */
     void upgradeUser(InputUserDto inputUserDto);
 
     /**
      * Поиск пользователя по id
-     * @param id
-     * @return
+     *
+     * @param id id пользователя
+     * @return дто пользователя
      */
     OutputUserDto findById(Long id);
 
     /**
      * Поиск пользователя по нормеру телефона
-     * @param phoneNumber
-     * @return
+     *
+     * @param phoneNumber номер телефона
+     * @return дто пользователя
      */
     OutputUserDto findByPhoneNumber(String phoneNumber);
 
     /**
-     * Получение полного списка клиентов
-     * @return
+     * Получение полного списка пользователей
+     *
+     * @return лист дто пользователя
      */
     List<OutputUserDto> findAll();
 }

@@ -19,7 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.mapping.MappingException;
 import org.springframework.stereotype.Service;
 
@@ -105,7 +104,7 @@ public class ProductServiceImpl implements ProductService {
      * Получение товара по id
      *
      * @param id id товара
-     * @return
+     * @return дто товара
      */
     @Override
     public OutputProductDto getById(Long id) {
@@ -118,7 +117,7 @@ public class ProductServiceImpl implements ProductService {
     /**
      * Получение полного списка товаров
      *
-     * @return
+     * @return лист дто товаров
      */
     @Override
     public List<OutputProductDto> getAll() {
@@ -132,7 +131,7 @@ public class ProductServiceImpl implements ProductService {
      *
      * @param page     Нормер страницы
      * @param pageSize Количество элементов на стринце
-     * @return
+     * @return лист дто товаров
      */
     @Override
     public List<OutputProductDto> getProductPage(Integer page, Integer pageSize) {

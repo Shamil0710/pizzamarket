@@ -2,11 +2,14 @@ package com.pizzamarket.pizzamarket.constants;
 
 
 public final class EndpointConstants {
-    private EndpointConstants() {};
+    private EndpointConstants() {
+    }
 
     public static final String ROOT = "root";
 
-    /** Продукт **/
+    /**
+     * Продукт
+     **/
 
     public static final String PRODUCT = ROOT + "/product";
 
@@ -22,7 +25,9 @@ public final class EndpointConstants {
 
     public static final String PRODUCT_DELETE = PRODUCT + "/delete";
 
-    /** Юсер **/
+    /**
+     * Юсер
+     **/
 
     public static final String USER = ROOT + "/user";
 
@@ -36,7 +41,9 @@ public final class EndpointConstants {
 
     public static final String USER_DELETE = USER + "/delete/{phoneNumber}";
 
-    /** Заказ **/
+    /**
+     * Заказ
+     **/
 
     public static final String ORDER = ROOT + "/order";
 
@@ -48,7 +55,9 @@ public final class EndpointConstants {
 
     public static final String ORDER_GET_BY_PHONENUMBER = ORDER + "/phonenumber";
 
-    /** Карзина **/
+    /**
+     * Карзина
+     **/
 
     public static final String BASKET = ROOT + "/basket";
 
