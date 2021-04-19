@@ -1,6 +1,8 @@
 package com.pizzamarket.pizzamarket.services;
 
+import com.pizzamarket.pizzamarket.dto.CreateUserDto;
 import com.pizzamarket.pizzamarket.dto.InputUserDto;
+import com.pizzamarket.pizzamarket.dto.OutputUserDto;
 import com.pizzamarket.pizzamarket.entities.User;
 
 import java.util.List;
@@ -10,41 +12,52 @@ public interface UserService {
 
     /**
      * Метод добавление пользователя в базу
-     * @param inputUserDto
-     * @return
+     *
+     * @param createUserDto дто создания пользователя
      */
-    User createUser(InputUserDto inputUserDto);
+    void saveUser(CreateUserDto createUserDto);
 
     /**
      * Метод удаления пользователя из базы
-     * @param id
+     *
+     * @param id id пользователя
      */
     void deleteById(Long id);
 
     /**
      * Удаление пользователя из базы
-     * @param inputUserDto
+     *
+     * @param phoneNumber номер телефона
      */
-    void deleteByPhoneNumber(InputUserDto inputUserDto);
+    void deleteByPhoneNumber(String phoneNumber);
 
     /**
      * Обновление даных у пользователе
-     * @param inputUserDto
+     *
+     * @param inputUserDto дто пользователя
      */
     void upgradeUser(InputUserDto inputUserDto);
 
     /**
      * Поиск пользователя по id
-     * @param id
-     * @return
+     *
+     * @param id id пользователя
+     * @return дто пользователя
      */
-    Optional<User> findById(Long id);
+    OutputUserDto findById(Long id);
 
     /**
      * Поиск пользователя по нормеру телефона
-     * @param phoneNumber
-     * @return
+     *
+     * @param phoneNumber номер телефона
+     * @return дто пользователя
      */
-    List<User> findByPhoneNumber(Integer phoneNumber);
+    OutputUserDto findByPhoneNumber(String phoneNumber);
 
+    /**
+     * Получение полного списка пользователей
+     *
+     * @return лист дто пользователя
+     */
+    List<OutputUserDto> findAll();
 }

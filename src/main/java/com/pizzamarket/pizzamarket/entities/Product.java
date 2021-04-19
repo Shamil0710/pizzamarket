@@ -1,33 +1,57 @@
 package com.pizzamarket.pizzamarket.entities;
 
 import lombok.*;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import org.springframework.data.annotation.Id;
+
+import javax.persistence.*;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 
-import javax.persistence.GeneratedValue;
-
-@Entity
+/**
+ * Сущность отображающая продукт
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
 @ToString
 @EqualsAndHashCode
-public class Product {
+@Entity
+@Table(name = "product", schema = "mampiza")
+public class Product implements Serializable {
 
+    /**
+     * id продукта
+     */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id")
     private Long id;
-    @Column
+
+    /**
+     * Цена продукта
+     */
     @NonNull
-    private Long cost;
-    @Column
+    @Column(name = "cost")
+    private BigDecimal cost;
+
+    /**
+     * Название товара
+     */
     @NonNull
+    @Column(name = "title")
     private String title;
-    @Column
+
+    /**
+     * Описание товара
+     */
+    @Column(name = "description")
     private String description;
-    @Column
-    private String teg;
+
+    /**
+     * Тег типа товара
+     */
+    @Column(name = "tag")
+    private String tag;
 }
