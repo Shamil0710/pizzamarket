@@ -29,6 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         httpSecurity.csrf().disable().authorizeRequests().anyRequest().permitAll();
 
+        /** Пример spring security реализации  **/
 //        httpSecurity.csrf().and().cors()
 //                .disable()
 //                .authorizeRequests()
